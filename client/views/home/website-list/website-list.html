@@ -2,7 +2,7 @@
 <template name="website_list">
 	<ol>
     	{{#each websites}}
-	        {{> website_item}}
+	        {{> website_item website=(appendIndex this @index)}}
 	    {{/each}}
 	</ol>
 </template>

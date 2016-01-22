@@ -1,0 +1,30 @@
+<!-- template that displays individual website entries -->
+<template name="website_item">
+
+    <li>
+        {{#with website}}
+
+        <div class="{{#if isEven index}}bk-lightgrey{{/if}}">
+	        <a href="{{ url }}"><strong>{{ title }}</strong></a>
+	        <p>{{ description }}</p>
+            <p class="grey-small">
+                Added: {{formatDate createdOn}}
+
+                <br>Votes:
+                <a href="#" class="btn btn-default btn-xs bk-grey js-upvote">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+                {{ votePlus }}
+                <a href="#" class="btn btn-default btn-xs bk-grey js-downvote">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </a>
+                {{ voteMinus }}
+
+                <br><a>Details and comments</a>  
+            </p>
+        </div>
+
+        {{/with}}
+    </li>
+
+</template>
