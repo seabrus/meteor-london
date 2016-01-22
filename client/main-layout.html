@@ -1,0 +1,17 @@
+<template name="mainLayout">
+
+	<!-- navbar  - you will be putting the login functions here -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+            <a class="navbar-brand" href="#">SiteAce SW</a>
+            <p class="navbar-text">
+                {{> loginButtons}}
+            </p>
+	    </div>
+	  </div>
+	</nav>
+
+    {{> yield}}
+
+</template>
