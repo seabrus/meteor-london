@@ -3,39 +3,55 @@ Router.configure({
     loadingTemplate: 'loadingView'
 });
 
-Router.route('/', function() {
-    this.render('home');
-});
 
-Router.route('/website-details/:id', function() {
-    this.render('website_details', {
-        data: function() {
-            return {
-                website: Websites.findOne({_id: this.params.id}),
-                comments: Comments.find({websiteId: this.params.id}),
-            };
+Router.route('/', {
+    name: 'home',
+    template: 'home',
+
+    subscriptions: function() {
+        this.subscribe('websites').wait();
+    },
+
+    action: function() {
+        if (this.ready()) {
+            this.render();
+        } else {
+            this.render('loadingView');
         }
-    });
+    },
 });
 
-Router.onBeforeAction(function () {
+
+Router.route('/website-details/:id', {
+    name: 'website_details',
+    template: 'website_details',
+
+    subscriptions: function() {
+        this.subscribe('website', this.params.id).wait();
+        this.subscribe('comments', this.params.id).wait();
+    },
+
+    data: function() {
+        return {
+            website: Websites.find({}).fetch()[0],
+            comments: Comments.find({}),
+        };
+    },
+
+    action: function() {
+        if (this.ready()) {
+            this.render();
+        } else {
+            this.render('loadingView');
+        }
+    },
+});
+
+
+Router.onBeforeAction(function() {
     if (Meteor.loggingIn()) {
         this.render('loadingView');
     } else {
         this.next();
     }
 });
-
-
-
-
-/*
-Router.route('/images', function () {
-  this.render('navbar', {
-    to:"navbar"
-  });
-  this.render('images', {
-    to:"main"
-  });
-});
-*/
