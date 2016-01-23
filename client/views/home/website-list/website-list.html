@@ -2,7 +2,8 @@
 <template name="website_list">
 	<ol>
     	{{#each websites}}
-	        {{> website_item website=(appendIndex this @index)}}
+	        {{> website_item website=this itemIndex=@index}}
+	        <!-- {{> website_item website=(appendIndex this @index)}}       - this works, too, but it's a little more sophisticated -->
 	    {{/each}}
 	</ol>
 </template>

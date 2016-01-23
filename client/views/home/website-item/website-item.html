@@ -1,10 +1,11 @@
 <!-- template that displays individual website entries -->
 <template name="website_item">
 
-    <li>
-        {{#with website}}
+<!-- INDEX: {{../@index}}   -   this does NOT work: @index == undefined -->
 
-        <div class="{{#if isEven index}}bk-lightgrey{{/if}}">
+    <li>
+        <div class="{{#if isEven itemIndex}}bk-lightgrey{{/if}}">
+        {{#with website}}
 	        <a href="{{ url }}"><strong>{{ title }}</strong></a>
 	        <p>{{ description }}</p>
             <p class="grey-small">
@@ -22,9 +23,8 @@
 
                 <br><a>Details and comments</a>  
             </p>
-        </div>
-
         {{/with}}
+        </div>
     </li>
 
 </template>

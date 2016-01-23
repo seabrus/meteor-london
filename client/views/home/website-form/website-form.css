@@ -1,0 +1,14 @@
+.bk-yellow {
+    background-color: #fefdeb;
+}
+
+.rel-pos-m20 {
+    position: relative;
+    margin-bottom: 20px;
+}
+.error-text {
+    color: red;
+    position: absolute;
+    bottom: -19px;
+    padding: 0 3px;
+}
