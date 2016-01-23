@@ -1,0 +1,48 @@
+<template name="website_details">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12">
+                {{#with website}}
+
+                <h3 class="add-margin">{{title}}</h3>
+                <p class="add-margin-p"><strong>URL:</strong> <a href="{{url}}">{{url}}</a></p>
+                <p class="add-margin-p"><strong>Description:</strong> {{description}}</p>
+                <p class="add-margin-p"><strong>Created by:</strong> 
+                    {{#if createdBy}} {{getUserName createdBy}} {{else}} admin {{/if}}
+                </p>
+                <p class="add-margin-p"><strong>Added:</strong> {{formatDate createdOn}}</p>
+                <p class="add-margin-p"><strong>Votes:</strong>
+                    <a href="#" class="btn btn-default btn-xs bk-grey js-upvote">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </a>
+                    {{ votePlus }}
+                    <a href="#" class="btn btn-default btn-xs bk-grey js-downvote">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </a>
+                    {{ voteMinus }}
+                </p>
+
+                {{/with}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <hr>
+                <h3>{{#if comments.count}}Comments:{{else}} No comments yet {{/if}}</h3>
+                {{> comments_list}}
+            </div>
+        </div>
+
+        {{#if currentUser}}
+        <div class="row">
+            <div class="col-xs-12">
+                {{> comment_form website=website}}
+                <hr>
+            </div>
+        </div>
+        {{/if}}
+
+    </div>
+</template>

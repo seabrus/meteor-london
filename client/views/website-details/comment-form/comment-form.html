@@ -1,0 +1,27 @@
+<template name="comment_form">
+
+    <a class="btn btn-default btm-margin js-toggle-comment-form" href="#">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+
+    <div id="comment_form" class="hidden_div">
+        {{#with website}}
+
+        <form class="js-save-comment-form" novalidate>
+
+            <div class="form-group rel-pos-m20">
+                <label for="comment_text">* Comment</label>
+                <textarea rows="5" class="form-control bk-yellow" id="comment_text" name="comment_text"
+                       placeholder="This website is my favorate" required></textarea>
+                {{#if comment_error}}<div class="error-text">This field is required</div>{{/if}}
+            </div>
+
+            <button type="submit" class="btn btn-info">Submit</button>
+            <button type="submit" class="btn btn-default js-clear-comment-form">Clear</button>
+        </form>
+
+        {{/with}}
+    </div>
+
+</template>
+

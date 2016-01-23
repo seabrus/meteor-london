@@ -3,7 +3,7 @@
 
 <!-- INDEX: {{../@index}}   -   this does NOT work: @index == undefined -->
 
-    <li>
+    <li class="btm-margin">
         <div class="{{#if isEven itemIndex}}bk-lightgrey{{/if}}">
         {{#with website}}
 	        <a href="{{ url }}"><strong>{{ title }}</strong></a>
@@ -21,7 +21,7 @@
                 </a>
                 {{ voteMinus }}
 
-                <br><a>Details and comments</a>  
+                <br><a href="/website-details/{{_id}}">Details and comments</a>  
             </p>
         {{/with}}
         </div>

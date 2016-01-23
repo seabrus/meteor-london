@@ -1,0 +1,14 @@
+<template name="comment_item">
+
+    <li class="btm-margin">
+        <div class="{{#if isEven itemIndex}}bk-lightgrey{{/if}}">
+        {{#with comment}}
+	        <p>{{ commentText }}</p>
+            <p><i>Added by {{getUserName createdBy}}
+                  on {{formatDate createdOn}}</i>
+            </p>
+        {{/with}}
+        </div>
+    </li>
+
+</template>
