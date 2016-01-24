@@ -1,8 +1,8 @@
 /////
 //   Session's
 /////
-Session.setDefault('url_error_1', false);
-Session.setDefault('url_error_2', false);
+Session.setDefault('url_error_required', false);
+Session.setDefault('url_error_invalid', false);
 Session.setDefault('title_error', false);
 
 
@@ -10,12 +10,12 @@ Session.setDefault('title_error', false);
 //   Template Helpers
 /////
 Template.website_form.helpers({
-    url_error_1: function() {
-        return Session.get('url_error_1');
+    url_error_required: function() {
+        return Session.get('url_error_required');
     },
 
-    url_error_2: function() {
-        return Session.get('url_error_2');
+    url_error_invalid: function() {
+        return Session.get('url_error_invalid');
     },
 
     title_error: function() {
@@ -30,7 +30,7 @@ Template.website_form.helpers({
 Template.website_form.events({
 
     "click .js-toggle-website-form": function(event) {
-        $("#website_form").toggle('slow');
+        $('#website_form').toggle('slow');
     },
 
 
@@ -42,19 +42,19 @@ Template.website_form.events({
         var description = form.description.value.trim();
 
         // URL validation 
-        var urlRegex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-        // see https://mathiasbynens.be/demo/url-regex and https://gist.github.com/dperini/729294
+        Session.set('url_error_required', false);
+        Session.set('url_error_invalid', false);
 
-        Session.set('url_error_1', false);
-        Session.set('url_error_2', false);
-        if (!url) {
-            //alert("Site address is required");
-            Session.set('url_error_1', true);
+        var isUrlValid = Meteor.__validateUrl(url);   // see lib/auxiliary-functions/auxiliary-functions.js
+
+        if (isUrlValid === URL_ERROR_REQUIRED) {
+            Session.set('url_error_required', true);
+            form.url.focus();
             return false;
         }
-        if (!url.match(urlRegex)) {
-            //alert("Site address should be a valid URL");
-            Session.set('url_error_2', true);
+        if (isUrlValid === URL_ERROR_INVALID) {
+            Session.set('url_error_invalid', true);
+            form.url.focus();
             return false;
         }
 
@@ -62,6 +62,7 @@ Template.website_form.events({
         Session.set('title_error', false);
         if (!title) {
             Session.set('title_error', true);
+            form.title.focus();
             return false;
         }
 
@@ -77,7 +78,7 @@ Template.website_form.events({
                 voteMinus: 0,
             });
 
-            $("#website_form").toggle('slow'); // Close the form
+            $('#website_form').toggle('slow'); // Close the form
         }
 
         return false; // stop the form submit from reloading the page
@@ -85,8 +86,8 @@ Template.website_form.events({
 
 
     "click .js-clear-form": function(event) {
-        Session.set('url_error_1', false);
-        Session.set('url_error_2', false);
+        Session.set('url_error_required', false);
+        Session.set('url_error_invalid', false);
         Session.set('title_error', false);
 
         var form = $('form').get(0);
@@ -95,6 +96,35 @@ Template.website_form.events({
         form.description.value = '';
 
         return false; // stop the form submit from reloading the page
+    },
+
+
+    "blur #url": function(event) {
+        var url = event.target.value.trim();
+        var isUrlValid = Meteor.__validateUrl(url);
+
+        if (isUrlValid === VALID_URL) {
+            $('#loading-gif').show();
+
+            Meteor.call('getTitle', url, function(error, result) {
+                if (error)  {
+                    $('#loading-gif').hide('slow');
+                    console.log('website-form.js--getTitle error: ' + error.reason);
+                    return alert(error.reason);
+                }
+
+                //alert('result.title = ' + result.title);
+                if (result.title) {
+                    $('#title').val(result.title);
+                    $('#description').val(result.description);
+                }
+                $('#loading-gif').hide('slow');
+            });
+
+        } // end of "if (isUrlValid === VALID_URL)"
+
+        //event.preventDefault;
+        //return false; // stop the form submit from reloading the page
     },
 
 });

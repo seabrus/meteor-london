@@ -1,3 +1,5 @@
+/* http://www.w3schools.com/cssref/css_colornames.asp */
+
 .bk-yellow {
     background-color: #fefdeb;
 }
@@ -11,4 +13,14 @@
     position: absolute;
     bottom: -19px;
     padding: 0 3px;
+}
+
+.loading-gif {
+    display: none;
+    font-style: italic;
+    color: darkcyan;
+}
+
+.loading-wrapper {
+    display: inline-block;
 }
