@@ -6,8 +6,8 @@
     <li class="btm-margin">
         <div class="{{#if isEven itemIndex}}bk-lightgrey{{/if}}">
         {{#with website}}
-	        <a href="{{ url }}"><strong>{{ title }}</strong></a>
-	        <p>{{ description }}</p>
+	        <a href="{{ url }}" target="_blank"><strong>{{title}}</strong></a>
+	        <p>{{description}}</p>
             <p class="grey-small">
                 Added: {{formatDate createdOn}}
 
@@ -15,11 +15,11 @@
                 <a href="#" class="btn btn-default btn-xs bk-grey js-upvote">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </a>
-                {{ votePlus }}
+                {{votePlus}}
                 <a href="#" class="btn btn-default btn-xs bk-grey js-downvote">
                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                 </a>
-                {{ voteMinus }}
+                {{voteMinus}}
 
                 <br><a href="/website-details/{{_id}}">Details and comments</a>  
             </p>

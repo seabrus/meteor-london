@@ -72,7 +72,7 @@ Template.website_form.events({
                 title: title,
                 description: description,
                 createdOn: new Date(),
-                createdBy: Meteor.user()._id,
+                createdBy: Meteor.user().username || 'User without name',  //Meteor.users.find({_id: id}).fetch()[0];
                 votePlus: 0,
                 voteMinus: 0,
             });

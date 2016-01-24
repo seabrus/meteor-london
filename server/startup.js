@@ -10,7 +10,7 @@ Meteor.startup(function() {
             title: "Goldsmiths Computing Department",
             description: "This is where this course was developed.",
             createdOn: new Date(),
-            createdBy: null,
+            createdBy: 'admin',
             votePlus: 0,
             voteMinus: 0,
         });
@@ -20,7 +20,7 @@ Meteor.startup(function() {
             title: "University of London",
             description: "University of London International Programme.",
             createdOn: new Date(),
-            createdBy: null,
+            createdBy: 'admin',
             votePlus: 0,
             voteMinus: 0,
         });
@@ -30,7 +30,7 @@ Meteor.startup(function() {
             title: "Coursera",
             description: "Universal access to the world’s best education.",
             createdOn: new Date(),
-            createdBy: null,
+            createdBy: 'admin',
             votePlus: 0,
             voteMinus: 0,
         });
@@ -40,7 +40,7 @@ Meteor.startup(function() {
             title: "Google",
             description: "Popular search engine",
             createdOn: new Date(),
-            createdBy: null,
+            createdBy: 'admin',
             votePlus: 0,
             voteMinus: 0,
         });
