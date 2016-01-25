@@ -9,7 +9,23 @@ Router.route('/', {
     template: 'home',
 
     subscriptions: function() {
-        this.subscribe('websites').wait();
+        Session.setDefault('searchString', '');
+        return Meteor.subscribe('websites', Session.get('searchString'));
+        //this.subscribe('websites', Session.get('searchString')).wait();
+    },
+
+    data: function() {
+        return {
+            websites: function() {
+                Session.setDefault('websitesPerPageLimit', 10);
+                return Websites.find({},
+                    {
+                        sort: [['votePlus', 'desc'], ['voteMinus', 'desc']],
+                        limit: Session.get('websitesPerPageLimit')
+                    }
+                );
+            },
+        };
     },
 
     action: function() {

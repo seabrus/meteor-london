@@ -1,6 +1,5 @@
 /// Infinite scroll
 
-Session.setDefault('websitesPerPageLimit', 10);
 var lastScrollTop = 0; 
 
 $(window).scroll(function(event) {
@@ -25,17 +24,7 @@ $(window).scroll(function(event) {
 
 // helper function that returns all available websites
 Template.website_list.helpers({
-    websites: function() {
-        return Websites.find({}, 
-            {
-                sort: [['votePlus', 'desc'], ['voteMinus', 'desc']],
-                limit: Session.get('websitesPerPageLimit')
-            }
-        );
-    },
-
     appendIndex: function(obj, index) {
         return _.extend(obj, {index: index});
     },
-
 });

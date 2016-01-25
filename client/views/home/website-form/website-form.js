@@ -1,9 +1,17 @@
 /////
-//   Session's
+//   Sessions
 /////
 Session.setDefault('url_error_required', false);
 Session.setDefault('url_error_invalid', false);
 Session.setDefault('title_error', false);
+
+
+/////
+//   Initialization
+/////
+Template.website_form.onRendered(function() {
+    this.$('#search_input').val(Session.get('searchString'));
+});
 
 
 /////
@@ -31,6 +39,18 @@ Template.website_form.events({
 
     "click .js-toggle-website-form": function(event) {
         $('#website_form').toggle('slow');
+    },
+
+    "submit .js-search-start": function(event) {
+        var searchText = $('#search_input').val().trim();
+        Session.set('searchString', searchText);
+        return false; // stop the form submit from reloading the page
+    },
+
+    "click .js-search-reset": function(event) {
+        $('#search_input').val('');
+        Session.set('searchString', '');
+        return false;
     },
 
 
@@ -82,7 +102,7 @@ Template.website_form.events({
         }
 
         return false; // stop the form submit from reloading the page
-    },
+    }, // end of "submit .js-save-website-form"...
 
 
     "click .js-clear-form": function(event) {
@@ -90,7 +110,7 @@ Template.website_form.events({
         Session.set('url_error_invalid', false);
         Session.set('title_error', false);
 
-        var form = $('form').get(0);
+        var form = $('#save-website-form').get(0);
         form.url.value = '';
         form.title.value = '';
         form.description.value = '';
@@ -99,6 +119,7 @@ Template.website_form.events({
     },
 
 
+    // Autocomplete of Title and Description when blurring the "url" field
     "blur #url": function(event) {
         var url = event.target.value.trim();
         var isUrlValid = Meteor.__validateUrl(url);
@@ -125,7 +146,8 @@ Template.website_form.events({
 
         //event.preventDefault;
         //return false; // stop the form submit from reloading the page
-    },
+
+    }, // end of "blur #url"...
 
 });
 

@@ -1,18 +1,22 @@
 <template name="home">
     <div class="container">
 
-        {{#if currentUser}}
         <div class="row">
             <div class="col-xs-12">
                 {{> website_form}}
                 <hr>
             </div>
         </div>
-        {{/if}}
 
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="add-margin">Best Websites Ever</h3>
+                <h3 class="add-margin">
+                    {{#if websites.count}}
+                        Best 100 Websites Ever 
+                    {{else}}
+                        No website found 
+                    {{/if}}
+                </h3>
                 {{> website_list}}
             </div>
         </div>

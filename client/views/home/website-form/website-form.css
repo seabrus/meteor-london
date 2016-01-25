@@ -24,3 +24,26 @@
 .loading-wrapper {
     display: inline-block;
 }
+
+.add-btn-m20 {
+    margin-right: 20px;
+}
+.search-wrapper {
+    display: inline-block;
+}
+
+.form-inline-my {
+   box-sizing: border-box;
+}
+.form-inline-my .form-group {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
+ }
+.form-inline-my .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
+
