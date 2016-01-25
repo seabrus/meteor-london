@@ -110,10 +110,10 @@ Template.website_form.events({
                 if (error)  {
                     $('#loading-gif').hide('slow');
                     console.log('website-form.js--getTitle error: ' + error.reason);
-                    return alert(error.reason);
+                    //alert(error.reason);
+                    return;
                 }
 
-                //alert('result.title = ' + result.title);
                 if (result.title) {
                     $('#title').val(result.title);
                     $('#description').val(result.description);

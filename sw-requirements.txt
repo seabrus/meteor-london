@@ -12,7 +12,7 @@ You can gain up to 70% by implementing the following features:
 
 You can gain a further 30% by implementing one or more of the following features:
 
-Challenge 1: Automatic information
++Challenge 1: Automatic information
 Can you use the HTTP package for Meteor to pull in information about the posted web links automatically, so the user does not need to enter anything other than the URL? 
 
 Challenge 2: Search function

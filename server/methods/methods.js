@@ -7,39 +7,39 @@ ValidURL = Match.Where(function(x) {
 });
 
 Meteor.methods({
-  // ============================================================
-  //   Get the title of the website with specified URL
-  // ============================================================
+  // ===============================================================================
+  //   Get the title and meta description of the website with specified URL
+  // ===============================================================================
     getTitle: function(url) {
         if (this.userId  &&  Match.test(url, ValidURL)) {
-            //this.unblock(); // see https://themeteorchef.com/snippets/using-unblock-and-defer-in-methods/
+            //this.unblock(); // see more at https://themeteorchef.com/snippets/using-unblock-and-defer-in-methods/
             var response = null;
             var websiteInfo = {title: '', description: ''};
-            var titleReg = /<title>[\s\S]*<\/title>/;
-//            var descriptionReg = /<meta[\s\S]*?name=(['"]?)description\1[\s\S]*?>/;
-            var descriptionReg = /<meta[^>]*name=(['"]?)description\1[\s\S]*?>/;
-//gg = /<meta\sname=\"description\"[\s\S]*?>/
-            var contentReg = /content=(['"])[\s\S]*?\1/;
+
+            var titleReg = /<title[^>]*>[\s\S]*<\/title>/i;
+            var titleTextReg = />[^<]*</i;
+            var descriptionReg = /<meta[^>]*name=(['"]?)description\1[^>]*?>/i;
+            var contentReg = /content=(['"])[\s\S]*?\1/i;
 
             try {
-                response = HTTP.get(url);
+                response = HTTP.get(url, {timeout: 3000});
 
                 if (response.content) {
                     var isTitle = response.content.match(titleReg);
                     if (isTitle) {
-                        var title = isTitle[0].slice('<title>'.length, isTitle[0].indexOf('</title>'));
-                        websiteInfo.title = title.trim(); //$(response.content).filter('title').text(); -- NO jQuery on server, sorry
+                        var isTitleText = isTitle[0].match(titleTextReg);
+                        if (isTitleText) {
+                            var title = isTitleText[0].slice('>'.length, -1);
+                            websiteInfo.title = title.trim(); //$(response.content).filter('title').text(); -- NO jQuery on server, sorry
+                        }
                     }
 
                     var isDescription = response.content.match(descriptionReg);
-console.log('isDescription = ' + isDescription);
                     if (isDescription) {
                         var isContent = isDescription[0].match(contentReg);
-console.log('isContent = ' + isContent);
                         if (isContent) {
                             var content = isContent[0].slice('content="'.length, -1);
                             websiteInfo.description = content.trim();
-console.log('content = ' + websiteInfo.description);
                         }
                     }
                 } // end of "if (response.content)..."
@@ -48,12 +48,12 @@ console.log('content = ' + websiteInfo.description);
                 return websiteInfo;
             }
             catch(e) {
-                console.log('methods.js--getTitle error: ' + e.message);
+                console.log('SERVER methods.js--getTitle error: ' + e.message);
                 throw new Meteor.Error('gettitle-error', 'Error in getTitle');
             } // end of "try-catch" block
 
         } else {
-            console.log( 'methods.js # getTitle: ATTENTION - The user is NOT logged in or URL is broken' );
+            console.log( 'SERVER methods.js--getTitle: ATTENTION - The user is NOT logged in or URL is broken' );
             throw new Meteor.Error('no-access', 'Server error 11');
         } // end of "if (this.userId..."
 
