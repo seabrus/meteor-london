@@ -12,10 +12,20 @@ Meteor.publish('websites', function(searchString) {
 
     if (Match.test(searchString, String)) {
         var str = searchString.toLowerCase();
+
         if (str === '') {
             return Websites.find({}, {limit: 100});
         }
         else {
+            return Websites.find(
+                    {
+                        $text: {$search: str}
+                        // see explaination at https://www.okgrow.com/posts/guide-to-full-text-search-in-meteor
+                    },
+                    {limit: 100}
+            );
+
+/*
             return Websites.find(
                     {
                         $where: 'function() {var title=this.title.toLowerCase();var descr=this.description.toLowerCase();return (title.indexOf("' + str + '") !== -1 || descr.indexOf("' + str + '") !== -1); }'
@@ -23,7 +33,9 @@ Meteor.publish('websites', function(searchString) {
                     },
                     {limit: 100}
             );
-        }
+*/
+        } // end of "if (str === '')...else..."
+
     } // end of "if (Match.test(searchString, String))..."
     
 	this.ready();

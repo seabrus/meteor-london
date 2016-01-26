@@ -2,8 +2,8 @@
 
 Meteor.startup(function() {
 
-    if (!Websites.findOne()){
-        console.log("No websites yet. Creating starter data.");
+    if (!Websites.findOne()) {
+        console.log("Startup: No websites in DB yet. Creating starter data");
 
         Websites.insert({
             url: "http://www.gold.ac.uk/computing/",
@@ -44,5 +44,13 @@ Meteor.startup(function() {
             votePlus: 0,
             voteMinus: 0,
         });
-    }
-});
+
+        console.log("Startup: Creating search index");
+        Websites._ensureIndex({
+            "title": "text",
+            "description": "text",
+        });
+
+    }; // end of "if (!Websites.findOne())..."
+
+}); // end of "Meteor.startup"

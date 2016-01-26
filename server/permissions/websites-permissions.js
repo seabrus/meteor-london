@@ -1,4 +1,4 @@
-//   See also websites-collection.js for Schema-Collection2 tests
+//   See also websites-collection.js for Schema-Collection2 checks
 Websites.deny({
     update: function (userId, doc, fields, modifier) {
         if (!Meteor.user()) {
