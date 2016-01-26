@@ -128,10 +128,9 @@ Template.website_form.events({
             $('#loading-gif').show();
 
             Meteor.call('getTitle', url, function(error, result) {
-                if (error)  {
+                if (error) {
                     $('#loading-gif').hide('slow');
                     console.log('website-form.js--getTitle error: ' + error.reason);
-                    //alert(error.reason);
                     return;
                 }
 

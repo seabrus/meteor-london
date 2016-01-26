@@ -1,10 +1,11 @@
+/*
 Comments.deny({
     update: function (userId, doc, fields, modifier) {
         // can't change owners
         return _.contains(fields, 'createdBy');
     },
 });
-
+*/
 
 Comments.allow({
 	insert: function(userId, doc) {
@@ -20,7 +21,7 @@ Comments.allow({
 
         return (doc  &&  doc.createdBy === username);
 	}, 
-
+/*
 	update: function(userId, doc, fields, modifier) {
 		if (Meteor.user()) {
             return (_.contains(fields, 'commentText'));
@@ -28,4 +29,5 @@ Comments.allow({
 			return false;
 		}
 	},
+*/
 });

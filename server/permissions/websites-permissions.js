@@ -1,5 +1,9 @@
+//   See also websites-collection.js for Schema-Collection2 tests
 Websites.deny({
     update: function (userId, doc, fields, modifier) {
+        if (!Meteor.user()) {
+            return true;
+        }
         // can't change owners
         return _.contains(fields, 'createdBy');
     },

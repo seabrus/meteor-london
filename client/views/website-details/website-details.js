@@ -2,12 +2,20 @@
 //   Initialization
 /////
 Template.website_details.onRendered(function() {
+    var templateData = this.data;
+    var websiteTitle = templateData.website.title;
+    var titleTag = templateData.titleTag;
+
+    $('#title-tag').text(titleTag + websiteTitle + ' | Final Assignment');
+
+/*    // One more solution
     var routeData = Router.current().data();
     var websiteTitle = routeData.website.title;
     var titleTag = routeData.titleTag;
 
     $('#title-tag').text(titleTag + websiteTitle + ' | Final Assignment');
     routeData = null;
+*/
 });
 
 

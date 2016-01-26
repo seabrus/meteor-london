@@ -2,10 +2,8 @@
 //   Initialization
 /////
 Template.home.onRendered(function() {
-    var routeData = Router.current().data();
-    var titleTag = routeData.titleTag;
+    var titleTag = this.data.titleTag;
 
     $('#title-tag').text(titleTag);
-    routeData = null;
 });
 
