@@ -25,6 +25,7 @@ Router.route('/', {
                     }
                 );
             },
+            titleTag: 'SiteAce SB - Final Assignment | Introduction to Meteor.js - Coursera',
         };
     },
 
@@ -51,6 +52,7 @@ Router.route('/website-details/:id', {
         return {
             website: Websites.find({}).fetch()[0],
             comments: Comments.find({}),
+            titleTag: 'Detailed Info about ',
         };
     },
 

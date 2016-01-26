@@ -6,13 +6,11 @@
 
 
 // ===================================================
-//   home '/' route publications
+//   Publications for 'home' '/' route
 // ===================================================
 Meteor.publish('websites', function(searchString) {
 
     if (Match.test(searchString, String)) {
-console.log('SERVER# searchString = ' + searchString);
-
         var str = searchString.toLowerCase();
         if (str === '') {
             return Websites.find({}, {limit: 100});
@@ -23,7 +21,7 @@ console.log('SERVER# searchString = ' + searchString);
                         $where: 'function() {var title=this.title.toLowerCase();var descr=this.description.toLowerCase();return (title.indexOf("' + str + '") !== -1 || descr.indexOf("' + str + '") !== -1); }'
                         // see explaination at http://www.btday.com/where-mongo-operator-work-around-in-meteorjs/
                     },
-                    { limit: 100 }
+                    {limit: 100}
             );
         }
     } // end of "if (Match.test(searchString, String))..."
@@ -42,7 +40,7 @@ NonEmptyString = Match.Where(function(x) {
 });
 
 // ===================================================================
-//   website_details '/website-details/:id' route publications
+//   Publications for website_details '/website-details/:id' route
 // ===================================================================
 Meteor.publish('website', function(websiteId) {
     if (Match.test(websiteId, NonEmptyString)) {

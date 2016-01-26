@@ -1,7 +1,7 @@
 <template name="website_form">
 
     {{#if currentUser}}
-    <a class="btn btn-default add-btn-m20 js-toggle-website-form" href="#">
+    <a class="btn btn-default add-btn-m20 js-toggle-website-form" href="#" title="Add a new website">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
     {{/if}}
@@ -11,8 +11,8 @@
             <div class="form-group">
                 <input type="text" class="form-control bk-yellow" id="search_input"
                         placeholder="search...">
-                <button type="submit" class="btn btn-default">Go</button>
-                <button type="button" class="btn btn-default js-search-reset">Reset</button>
+                <button type="submit" class="btn btn-default" title="Start searching">Go</button>
+                <button type="button" class="btn btn-default js-search-reset" title="Reset the search filter">Reset</button>
             </div>
         </form>
     </div>
