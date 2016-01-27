@@ -32,6 +32,10 @@
     display: inline-block;
 }
 
+.top-margin {
+    margin-top: 20px;
+}
+
 .form-inline-my {
    box-sizing: border-box;
 }
