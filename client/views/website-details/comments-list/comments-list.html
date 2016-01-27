@@ -1,8 +1,9 @@
-<!-- template that displays several website items -->
 <template name="comments_list">
+
 	<ol>
     	{{#each comments}}
 	        {{> comment_item comment=this itemIndex=@index}}
 	    {{/each}}
 	</ol>
+
 </template>

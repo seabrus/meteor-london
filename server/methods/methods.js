@@ -1,14 +1,18 @@
 //   Any client-provided information passed to methods should be run through the check package
 //   Ensure authentication checks exist for each Meteor.method  --  Always check the user - he/she should be logged in!
 
+
+// ===============================================================================
+//   Match pattern
+// ===============================================================================
 ValidURL = Match.Where(function(x) {
-    var result = Meteor.__validateUrl(x);
+    var result = Meteor.__validateUrl(x);   // see /lib/auxiliary-functions/auxiliary-functions.js
     return !result;
 });
 
 Meteor.methods({
   // ===============================================================================
-  //   Get the title and meta description of the website with specified URL
+  //   Retrieve the title tag and meta description from a website with a specified URL
   // ===============================================================================
     getTitle: function(url) {
         if (this.userId  &&  Match.test(url, ValidURL)) {

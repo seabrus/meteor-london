@@ -93,7 +93,7 @@ Template.website_form.events({
                 title: title,
                 description: description,
                 createdOn: new Date(),
-                createdBy: Meteor.user().username || 'User without name',  //Meteor.users.find({_id: id}).fetch()[0];
+                createdBy: Meteor.user().username || 'User without name',
                 votePlus: 0,
                 voteMinus: 0,
             });
@@ -122,7 +122,7 @@ Template.website_form.events({
     // Autocomplete of Title and Description when blurring the "url" field
     "blur #url": function(event) {
         var url = event.target.value.trim();
-        var isUrlValid = Meteor.__validateUrl(url);
+        var isUrlValid = Meteor.__validateUrl(url); // see "/lib/auxiliary-functions/auxiliary-functions.js"
 
         if (isUrlValid === VALID_URL) {
             $('#loading-gif').show();
@@ -149,6 +149,3 @@ Template.website_form.events({
     }, // end of "blur #url"...
 
 });
-
-
-

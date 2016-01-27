@@ -1,12 +1,13 @@
 <!-- template that displays individual website entries -->
 <template name="website_item">
 
-<!-- INDEX: {{../@index}}   -   this does NOT work: @index == undefined -->
+<!-- INDEX: {{../@index}}   -   this does NOT work here: @index == undefined -->
 
     <li class="btm-margin">
         <div class="{{#if isEven itemIndex}}bk-lightgrey{{/if}}">
+
         {{#with website}}
-	        <a href="{{ url }}" target="_blank"><strong>{{title}}</strong></a>
+	        <a href="{{url}}" target="_blank"><strong>{{title}}</strong></a>
 	        <p>{{description}}</p>
             <p class="grey-small">
                 Added: {{formatDate createdOn}}
@@ -24,6 +25,7 @@
                 <br><a href="/website-details/{{_id}}">Details and comments</a>  
             </p>
         {{/with}}
+
         </div>
     </li>
 

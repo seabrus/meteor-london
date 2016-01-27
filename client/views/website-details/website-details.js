@@ -8,7 +8,8 @@ Template.website_details.onRendered(function() {
 
     $('#title-tag').text(titleTag + websiteTitle + ' | Final Assignment');
 
-/*    // One more solution
+/*    
+// One more solution:
     var routeData = Router.current().data();
     var websiteTitle = routeData.website.title;
     var titleTag = routeData.titleTag;
@@ -58,4 +59,3 @@ Template.website_details.events({
         return false; // prevent the button from reloading the page
     }
 });
-

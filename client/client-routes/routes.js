@@ -1,6 +1,6 @@
 Router.configure({
     layoutTemplate: 'mainLayout',
-    loadingTemplate: 'loadingView'
+    loadingTemplate: 'loadingView',
 });
 
 

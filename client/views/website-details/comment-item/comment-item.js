@@ -15,7 +15,9 @@ Template.comment_item.helpers({
 /////
 //   Template Events
 /////
+/*
 Template.comment_item.events({
 
 });
+*/
 

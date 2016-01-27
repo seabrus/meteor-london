@@ -34,10 +34,12 @@ Template.comment_form.events({
         // Comment validation 
         Session.set('comment_error', false);
         Session.set('comment_error_2', false);
+        // Comment is required
         if (!commentText) {
             Session.set('comment_error', true);
             return false;
         }
+        // Comment should be at least 5 symbols in length
         if (commentText.length < 5) {
             Session.set('comment_error_2', true);
             return false;
@@ -46,13 +48,13 @@ Template.comment_form.events({
         // Save the comment to DB
         if (Meteor.user()) {
             Comments.insert({
-                createdOn: new Date(),
-                createdBy: Meteor.user().username || 'User without name',  //Meteor.users.find({_id: id}).fetch()[0];
                 commentText: commentText,
+                createdOn: new Date(),
+                createdBy: Meteor.user().username || 'User without name',
                 websiteId: this._id,   // website's  _id
             });
 
-            // Close the form
+            // Hide the form
             $("#comment_form").toggle('slow');
         }
 
@@ -71,6 +73,3 @@ Template.comment_form.events({
     },
 
 });
-
-
-

@@ -1,9 +1,11 @@
 <template name="comment_form">
 
+    <!-- Button to show/hide the form below -->
     <a class="btn btn-default btm-margin js-toggle-comment-form" href="#" title="Add a new comment">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
 
+    <!-- Form for adding a new comment -->
     <div id="comment_form" class="hidden_div">
         {{#with website}}
 
@@ -25,4 +27,3 @@
     </div>
 
 </template>
-
