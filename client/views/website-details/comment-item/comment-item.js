@@ -1,7 +1,7 @@
-/////
+// =================================================
 //   Template Helpers
-/////
-Template.comment_item.helpers({
+// =================================================
+Template.commentItem.helpers({
     formatDate: function(date) {
         return date.toISOString().slice(0, 10);
     },
@@ -12,11 +12,11 @@ Template.comment_item.helpers({
 });
 
 
-/////
+// =================================================
 //   Template Events
-/////
+// =================================================
 /*
-Template.comment_item.events({
+Template.commentItem.events({
 
 });
 */

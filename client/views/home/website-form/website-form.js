@@ -1,23 +1,23 @@
-/////
+// =================================================
 //   Sessions
-/////
+// =================================================
 Session.setDefault('url_error_required', false);
 Session.setDefault('url_error_invalid', false);
-Session.setDefault('title_error', false);
+Session.setDefault('title_error_required', false);
 
 
-/////
+// =================================================
 //   Initialization
-/////
-Template.website_form.onRendered(function() {
-    this.$('#search_input').val(Session.get('searchString'));
+// =================================================
+Template.websiteForm.onRendered(function() {
+    this.$('#search-input').val(Session.get('searchString'));
 });
 
 
-/////
+// =================================================
 //   Template Helpers
-/////
-Template.website_form.helpers({
+// =================================================
+Template.websiteForm.helpers({
     url_error_required: function() {
         return Session.get('url_error_required');
     },
@@ -26,29 +26,29 @@ Template.website_form.helpers({
         return Session.get('url_error_invalid');
     },
 
-    title_error: function() {
-        return Session.get('title_error');
+    title_error_required: function() {
+        return Session.get('title_error_required');
     },
 });
 
 
-/////
+// =================================================
 //   Template Events
-/////
-Template.website_form.events({
+// =================================================
+Template.websiteForm.events({
 
     "click .js-toggle-website-form": function(event) {
-        $('#website_form').toggle('slow');
+        $('#website-form').toggle('slow');
     },
 
     "submit .js-search-start": function(event) {
-        var searchText = $('#search_input').val().trim();
+        var searchText = $('#search-input').val().trim();
         Session.set('searchString', searchText);
         return false; // stop the form submit from reloading the page
     },
 
     "click .js-search-reset": function(event) {
-        $('#search_input').val('');
+        $('#search-input').val('');
         Session.set('searchString', '');
         return false;
     },
@@ -79,9 +79,9 @@ Template.website_form.events({
         }
 
         // Title validation 
-        Session.set('title_error', false);
+        Session.set('title_error_required', false);
         if (!title) {
-            Session.set('title_error', true);
+            Session.set('title_error_required', true);
             form.title.focus();
             return false;
         }
@@ -98,7 +98,7 @@ Template.website_form.events({
                 voteMinus: 0,
             });
 
-            $('#website_form').toggle('slow'); // Close the form
+            $('#website-form').toggle('slow'); // Close the form
         }
 
         return false; // stop the form submit from reloading the page
@@ -108,7 +108,7 @@ Template.website_form.events({
     "click .js-clear-form": function(event) {
         Session.set('url_error_required', false);
         Session.set('url_error_invalid', false);
-        Session.set('title_error', false);
+        Session.set('title_error_required', false);
 
         var form = $('#save-website-form').get(0);
         form.url.value = '';
@@ -130,7 +130,7 @@ Template.website_form.events({
             Meteor.call('getTitle', url, function(error, result) {
                 if (error) {
                     $('#loading-gif').hide('slow');
-                    console.log('website-form.js--getTitle error: ' + error.reason);
+                    console.log('website-form.js--getTitle error: ' + error.reason + '. URL = ' + url);
                     return;
                 }
 

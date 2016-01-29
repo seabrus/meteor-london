@@ -1,4 +1,4 @@
-<template name="comment_form">
+<template name="commentForm">
 
     <!-- Button to show/hide the form below -->
     <a class="btn btn-default btm-margin js-toggle-comment-form" href="#" title="Add a new comment">
@@ -6,17 +6,17 @@
     </a>
 
     <!-- Form for adding a new comment -->
-    <div id="comment_form" class="hidden_div">
+    <div id="comment-form" class="hidden-div">
         {{#with website}}
 
         <form class="js-save-comment-form" novalidate>
 
             <div class="form-group rel-pos-m20">
-                <label for="comment_text">* Comment</label>
-                <textarea rows="5" class="form-control bk-yellow" id="comment_text" name="comment_text"
+                <label for="comment-text">* Comment</label>
+                <textarea rows="5" class="form-control bk-yellow" id="comment-text" name="commentText"
                        placeholder="This website is my favorate" required></textarea>
-                {{#if comment_error}}<div class="error-text">This field is required</div>{{/if}}
-                {{#if comment_error_2}}<div class="error-text">Don't be sparing of words &mdash; write at least 5 symbols</div>{{/if}}
+                {{#if comment_error_required}}<div class="error-text">This field is required</div>{{/if}}
+                {{#if comment_error_too_small}}<div class="error-text">Don't be sparing of words &mdash; write at least 5 symbols</div>{{/if}}
             </div>
 
             <button type="submit" class="btn btn-info">Submit</button>

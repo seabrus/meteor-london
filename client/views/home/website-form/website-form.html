@@ -1,5 +1,4 @@
-<template name="website_form">
-
+<template name="websiteForm">
 
     <!-- Button to show/hide the form -->
     {{#if currentUser}}
@@ -12,7 +11,7 @@
     <div class="search-wrapper">
         <form class="form-inline-my js-search-start">
             <div class="form-group">
-                <input type="text" class="form-control bk-yellow" id="search_input"
+                <input type="text" class="form-control bk-yellow" id="search-input"
                         placeholder="search...">
                 <button type="submit" class="btn btn-default" title="Start searching">Go</button>
                 <button type="button" class="btn btn-default js-search-reset" title="Reset the search filter">Reset</button>
@@ -23,7 +22,7 @@
 
     <!-- Form for adding a new website -->
     {{#if currentUser}}
-    <div id="website_form" class="hidden_div top-margin">
+    <div id="website-form" class="hidden-div top-margin">
         <form class="js-save-website-form" id="save-website-form" novalidate>
 
             <div class="form-group rel-pos-m20">
@@ -43,7 +42,7 @@
                 </div>
                 <input type="text" class="form-control bk-yellow" id="title" name="title"
                        placeholder="Mysite" required>
-                {{#if title_error}}<div class="error-text">This field is required</div>{{/if}}
+                {{#if title_error_required}}<div class="error-text">This field is required</div>{{/if}}
             </div>
 
             <div class="form-group">

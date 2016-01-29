@@ -1,8 +1,8 @@
-<template name="comments_list">
+<template name="commentsList">
 
 	<ol>
     	{{#each comments}}
-	        {{> comment_item comment=this itemIndex=@index}}
+	        {{> commentItem comment=this itemIndex=@index}}
 	    {{/each}}
 	</ol>
 

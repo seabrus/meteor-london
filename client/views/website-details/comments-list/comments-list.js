@@ -1,9 +1,9 @@
-/////
-// template helpers
-/////
+// =================================================
+//   Template helpers
+// =================================================
 
 /*
-Template.website_list.helpers({
+Template.websiteList.helpers({
 
 });
 */

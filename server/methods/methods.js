@@ -52,7 +52,7 @@ Meteor.methods({
                 return websiteInfo;
             }
             catch(e) {
-                console.log('SERVER methods.js--getTitle error: ' + e.message);
+                console.log('SERVER methods.js--getTitle error: ' + e.message + '. URL = ' + url);
                 throw new Meteor.Error('gettitle-error', 'Error in getTitle');
             } // end of "try-catch" block
 

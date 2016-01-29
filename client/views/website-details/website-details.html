@@ -1,4 +1,4 @@
-<template name="website_details">
+<template name="websiteDetails">
     <div class="container">
 
         <div class="row">
@@ -29,14 +29,14 @@
             <div class="col-xs-12">
                 <hr>
                 <h3>{{#if comments.count}}Comments:{{else}} No comments yet {{/if}}</h3>
-                {{> comments_list}}
+                {{> commentsList}}
             </div>
         </div>
 
         {{#if currentUser}}
         <div class="row">
             <div class="col-xs-12">
-                {{> comment_form website=website}}
+                {{> commentForm website=website}}
                 <hr>
             </div>
         </div>

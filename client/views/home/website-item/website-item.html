@@ -1,5 +1,4 @@
-<!-- template that displays individual website entries -->
-<template name="website_item">
+<template name="websiteItem">
 
 <!-- INDEX: {{../@index}}   -   this does NOT work here: @index == undefined -->
 
@@ -22,7 +21,7 @@
                 </a>
                 {{voteMinus}}
 
-                <br><a href="/website-details/{{_id}}">Details and comments</a>  
+                <br><a href="{{pathFor 'website-details' id=_id}}">Details and comments</a>   <!-- /website-details/{{_id}} -->
             </p>
         {{/with}}
 

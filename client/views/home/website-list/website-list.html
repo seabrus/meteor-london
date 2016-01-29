@@ -1,9 +1,10 @@
-<!-- template that displays several website items -->
-<template name="website_list">
+<template name="websiteList">
+
 	<ol>
     	{{#each websites}}
-	        {{> website_item website=this itemIndex=@index}}
+	        {{> websiteItem website=this itemIndex=@index}}
 	        <!-- {{> website_item website=(appendIndex this @index)}}       - this works, too, but it's a little more sophisticated -->
 	    {{/each}}
 	</ol>
+
 </template>

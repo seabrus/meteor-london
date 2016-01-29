@@ -40,8 +40,8 @@ Router.route('/', {
 
 
 Router.route('/website-details/:id', {
-    name: 'website_details',
-    template: 'website_details',
+    name: 'website-details',
+    template: 'websiteDetails',
 
     subscriptions: function() {
         this.subscribe('website', this.params.id).wait();

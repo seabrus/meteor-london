@@ -1,4 +1,7 @@
-/// Infinite scroll
+// =================================================
+//   Infinite scroll
+// =================================================
+ADD_ITEMS_WHEN_SCROLL = 5;
 
 var lastScrollTop = 0; 
 
@@ -10,7 +13,7 @@ $(window).scroll(function(event) {
         // test if we are going down
         if (scrollTop > lastScrollTop) {
             // yes we are heading down...
-           Session.set('websitesPerPageLimit', Session.get('websitesPerPageLimit') + 5);
+           Session.set('websitesPerPageLimit', Session.get('websitesPerPageLimit') + ADD_ITEMS_WHEN_SCROLL);
         }
 
         lastScrollTop = scrollTop;
@@ -18,12 +21,10 @@ $(window).scroll(function(event) {
 });
 
 
-/////
-// template helpers
-/////
-
-// helper function that returns all available websites
-Template.website_list.helpers({
+// =================================================
+//   Template helpers
+// =================================================
+Template.websiteList.helpers({
     appendIndex: function(obj, index) {
         return _.extend(obj, {index: index});
     },

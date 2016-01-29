@@ -1,7 +1,7 @@
-/////
+// =================================================
 //   Template Helpers
-/////
-Template.website_item.helpers({
+// =================================================
+Template.websiteItem.helpers({
     formatDate: function(date) {
         return date.toISOString().slice(0, 10);
     },
@@ -12,10 +12,10 @@ Template.website_item.helpers({
 });
 
 
-/////
+// =================================================
 //   Template Events
-/////
-Template.website_item.events({
+// =================================================
+Template.websiteItem.events({
 
     "click .js-upvote": function(event) {
         if (!Meteor.user()) {
@@ -25,8 +25,8 @@ Template.website_item.events({
 
         // example of how you can access the id for the website in the database
         // (this is the data context for the template)
-        var website_id = this._id;
-        Websites.update({_id: website_id}, {$inc: {'votePlus': 1}});
+        var websiteId = this._id;
+        Websites.update({_id: websiteId}, {$inc: {'votePlus': 1}});
 
         return false; // prevent the button from reloading the page
     },
@@ -40,8 +40,8 @@ Template.website_item.events({
 
         // example of how you can access the id for the website in the database
         // (this is the data context for the template)
-        var website_id = this._id;
-        Websites.update({_id: website_id}, {$inc: {'voteMinus': -1}});
+        var websiteId = this._id;
+        Websites.update({_id: websiteId}, {$inc: {'voteMinus': -1}});
 
         return false; // prevent the button from reloading the page
     },

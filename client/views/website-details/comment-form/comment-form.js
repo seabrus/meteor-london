@@ -1,47 +1,49 @@
-/////
+// =================================================
 //   Session's
-/////
-Session.setDefault('comment_error', false);
-Session.setDefault('comment_error_2', false);
+// =================================================
+Session.setDefault('comment_error_required', false);
+Session.setDefault('comment_error_too_small', false);
 
 
-/////
+// =================================================
 //   Template Helpers
-/////
-Template.comment_form.helpers({
-    comment_error: function() {
-        return Session.get('comment_error');
+// =================================================
+Template.commentForm.helpers({
+    comment_error_required: function() {
+        return Session.get('comment_error_required');
     },
 
-    comment_error_2: function() {
-        return Session.get('comment_error_2');
+    comment_error_too_small: function() {
+        return Session.get('comment_error_too_small');
     },
 });
 
 
-/////
+// =================================================
 //   Template Events
-/////
-Template.comment_form.events({
+// =================================================
+Template.commentForm.events({
     "click .js-toggle-comment-form": function(event) {
-        $("#comment_form").toggle('slow');
+        $("#comment-form").toggle('slow');
     },
 
     "submit .js-save-comment-form": function(event) {
         var form = event.target;
-        var commentText = form.comment_text.value.trim();
+        var commentText = form.commentText.value.trim();
 
         // Comment validation 
-        Session.set('comment_error', false);
-        Session.set('comment_error_2', false);
+        Session.set('comment_error_required', false);
+        Session.set('comment_error_too_small', false);
         // Comment is required
         if (!commentText) {
-            Session.set('comment_error', true);
+            Session.set('comment_error_required', true);
+            form.commentText.focus();
             return false;
         }
-        // Comment should be at least 5 symbols in length
-        if (commentText.length < 5) {
-            Session.set('comment_error_2', true);
+        // Comment should be at least COMMENT_MIN_LENGTH symbols in length
+        if (commentText.length < COMMENT_MIN_LENGTH) {
+            Session.set('comment_error_too_small', true);
+            form.commentText.focus();
             return false;
         }
 
@@ -55,7 +57,7 @@ Template.comment_form.events({
             });
 
             // Hide the form
-            $("#comment_form").toggle('slow');
+            $("#comment-form").toggle('slow');
         }
 
         return false; // stop the form submit from reloading the page
@@ -63,11 +65,11 @@ Template.comment_form.events({
 
 
     "click .js-clear-comment-form": function(event) {
-        Session.set('comment_error', false);
-        Session.set('comment_error_2', false);
+        Session.set('comment_error_required', false);
+        Session.set('comment_error_too_small', false);
 
         var form = $('form').get(0);
-        form.comment_text.value = '';
+        form.commentText.value = '';
 
         return false; // stop the form submit from reloading the page
     },
