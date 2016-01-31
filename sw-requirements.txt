@@ -18,7 +18,7 @@ Can you use the HTTP package for Meteor to pull in information about the posted 
 +Challenge 2: Search function
 Implement a search function that allows the user to search within the listed sites for key words
 
-Challenge 3: Website recommender
++Challenge 3: Website recommender
 Can you recommend websites to users based on things they have up voted and commented on? E.g. if I up vote a site entitled ‘Tofu recipes’, it would recommend other sites with ‘tofu’ and ‘recipe’ in their titles or descriptions. 
 
 You should deploy your application using the Meteor deploy command and submit a link to the site running on the Meteor server. 

@@ -3,27 +3,26 @@
 // =================================================
 Session.setDefault('alertType', 'alert');
 Session.setDefault('notShowModalAlert', false);
+Session.setDefault('recommenderText', '');
 
 
 // =================================================
 //   Template Events
 // =================================================
 Template.modalAlert.events({
-    'click .js-ok': function(event) {
-        $("#modal-alert").modal('hide');
-        return false;
-    },
-
     'click .js-yes': function(event) {
-
         $("#modal-alert").modal('hide');
+
+        var searchText = Session.get('recommenderText');
+        Session.set('searchString', searchText);
+
+        if (Router.current().route.getName() !== 'home') {
+            Router.go('home');
+        }
+
         return false;
     },
 
-    'click .js-no': function(event) {
-        $("#modal-alert").modal('hide');
-        return false;
-    },
 
     'change .js-not-show-modal-alert': function(event) {
         if (event.target.value === 'NOT_SHOW_MODAL_ALERT') {
@@ -59,13 +58,18 @@ Template.modalAlert.helpers({
 //
 //  @param {string} alertText
 //  @param {string} alertType -- Can be "alert" or "confirm"
+//  @param {string} recommenderText
 // =================================================
-Meteor.__modalAlert = function(alertText, alertType) {
+Meteor.__modalAlert = function(alertText, alertType, recommenderText) {
     var messageText = alertText || '';
     $('#modal-alert-text').text(messageText);
 
     var messageType = alertType || 'alert'; 
     Session.set('alertType', messageType);
+
+    if (recommenderText) {
+        Session.set('recommenderText', recommenderText);
+    }
 
     $("#modal-alert").modal('show');
 };
