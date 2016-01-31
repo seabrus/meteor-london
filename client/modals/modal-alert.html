@@ -1,0 +1,46 @@
+<template name="modalAlert">
+
+<div class="modal fade" id="modal-alert">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div class="modal-title">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="alert alert-warning btm-margin-0" role="alert">
+                            <p id="modal-alert-text" class="text-center"></p>
+                        </div>
+                    </div>
+                    {{#if isConfirm}}
+                    <div class="form-group">
+                        <input type="checkbox" class="form-control js-not-show-modal-alert" id="not-show-modal-alert"
+                               name="notShowModalAlert" value="NOT_SHOW_MODAL_ALERT" />
+                        <label for="not-show-modal-alert">Don't show me this dialog again</label>
+                    </div>
+                    {{/if}}
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                {{#if isAlert}}
+                <div class="text-center">
+                    <button class="btn btn-info js-ok" data-dismiss="modal">OK</button>
+                </div>
+                {{/if}}
+                {{#if isConfirm}}
+                <div class="text-center">
+                    <button class="btn btn-default js-yes" data-dismiss="modal">Yes</button>
+                    <button class="btn btn-default js-no" data-dismiss="modal">No</button>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+</template>

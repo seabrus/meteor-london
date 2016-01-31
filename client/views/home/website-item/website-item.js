@@ -19,7 +19,8 @@ Template.websiteItem.events({
 
     "click .js-upvote": function(event) {
         if (!Meteor.user()) {
-            alert("Please log in to up vote websites");
+            //alert("Please log in to up vote websites");
+            Meteor.__modalAlert('Please log in to up vote websites', 'alert');
             return false;
         }
 
@@ -34,7 +35,8 @@ Template.websiteItem.events({
 
     "click .js-downvote": function(event) {
         if (!Meteor.user()) {
-            alert("Please log in to down vote websites");
+            //alert("Please log in to down vote websites");
+            Meteor.__modalAlert('Please log in to down vote websites', 'alert');
             return false;
         }
 

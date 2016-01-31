@@ -8,8 +8,7 @@ Template.websiteDetails.onRendered(function() {
 
     $('#title-tag').text(titleTag + websiteTitle + ' | Final Assignment');
 
-/*    
-// One more solution:
+/*      // One more solution:
     var routeData = Router.current().data();
     var websiteTitle = routeData.website.title;
     var titleTag = routeData.titleTag;
@@ -37,7 +36,8 @@ Template.websiteDetails.events({
 
     "click .js-upvote": function(event) {
         if (!Meteor.user()) {
-            alert('Please log in to up vote websites');
+            //alert('Please log in to up vote websites');
+            Meteor.__modalAlert('Please log in to up vote websites', 'alert');
             return false;
         }
         // example of how you can access the id for the website in the database
@@ -50,7 +50,8 @@ Template.websiteDetails.events({
 
     "click .js-downvote": function(event) {
         if (!Meteor.user()) {
-            alert('Please log in to down vote websites');
+            //alert('Please log in to down vote websites');
+            Meteor.__modalAlert('Please log in to down vote websites', 'alert');
             return false;
         }
 

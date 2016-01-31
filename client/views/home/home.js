@@ -1,6 +1,6 @@
-/////
+// =================================================
 //   Initialization
-/////
+// =================================================
 Template.home.onRendered(function() {
     var titleTag = this.data.titleTag;
 
