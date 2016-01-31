@@ -2,13 +2,18 @@
 //   Initialization
 // =================================================
 Template.websiteDetails.onRendered(function() {
+/*
     var templateData = this.data;
     var websiteTitle = templateData.website.title;
+*/
+    var templateData = this.data;
     var titleTag = templateData.titleTag;
+    var websiteId = templateData.websiteId;
+    var websiteTitle = Websites.find({_id:websiteId}).fetch()[0].title;
 
     $('#title-tag').text(titleTag + websiteTitle + ' | Final Assignment');
 
-/*      // One more solution:
+/*    // One more solution:
     var routeData = Router.current().data();
     var websiteTitle = routeData.website.title;
     var titleTag = routeData.titleTag;

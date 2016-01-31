@@ -44,8 +44,11 @@ Router.route('/website-details/:id', {
     template: 'websiteDetails',
 
     subscriptions: function() {
-        this.subscribe('website', this.params.id).wait();
-        this.subscribe('comments', this.params.id).wait();
+        //this.subscribe('website', this.params.id).wait();
+        //this.subscribe('comments', this.params.id).wait();
+        var handle1 = Meteor.subscribe('website', this.params.id);
+        var handle2 = Meteor.subscribe('comments', this.params.id);
+        return [handle1, handle2];
     },
 
     data: function() {
@@ -53,6 +56,7 @@ Router.route('/website-details/:id', {
             website: Websites.find({}).fetch()[0],
             comments: Comments.find({}),
             titleTag: 'Detailed Info about ',
+            websiteId: this.params.id,
         };
     },
 
