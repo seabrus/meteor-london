@@ -2,14 +2,11 @@
 //   Initialization
 // =================================================
 Template.websiteDetails.onRendered(function() {
-/*
-    var templateData = this.data;
-    var websiteTitle = templateData.website.title;
-*/
     var templateData = this.data;
     var titleTag = templateData.titleTag;
-    var websiteId = templateData.websiteId;
-    var websiteTitle = Websites.find({_id:websiteId}).fetch()[0].title;
+    //var websiteId = templateData.websiteId;   // >>> see comments in "client/client-routes/routes.js"
+    //var websiteTitle = Websites.find({_id:websiteId}).fetch()[0].title;
+    var websiteTitle = templateData.website.title;
 
     $('#title-tag').text(titleTag + websiteTitle + ' | Final Assignment');
 

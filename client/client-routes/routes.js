@@ -44,19 +44,32 @@ Router.route('/website-details/:id', {
     template: 'websiteDetails',
 
     subscriptions: function() {
-        //this.subscribe('website', this.params.id).wait();
-        //this.subscribe('comments', this.params.id).wait();
-        var handle1 = Meteor.subscribe('website', this.params.id);
+        // this.subscribe('website', this.params.id).wait();
+        // this.subscribe('comments', this.params.id).wait();
+        // // var handle1 = Meteor.subscribe('website', this.params.id);
+        // // var handle2 = Meteor.subscribe('comments', this.params.id);
+        // // return [handle1, handle2];
+        // // // return Meteor.subscribe('comments', this.params.id);
+        // // // // var handle1 = Meteor.subscribe('websites', '');
+        var handle1 = Meteor.subscribe('websites', Session.get('searchString'));
+        // Using the subscription above, I hope that meteor does NOT re-fetch subscription for 'home'
+        // But actually all that I need is   Meteor.subscribe('website', this.params.id)
         var handle2 = Meteor.subscribe('comments', this.params.id);
         return [handle1, handle2];
     },
 
     data: function() {
         return {
-            website: Websites.find({}).fetch()[0],
+            website: Websites.find({_id: this.params.id}).fetch()[0],
             comments: Comments.find({}),
             titleTag: 'Detailed Info about ',
-            websiteId: this.params.id,
+            // If I use the approach below, then website.title is taken from the previous website or the first site from 'home' subscription
+            //   -- this is seen at meteor.com, locally it is not seen
+            //website: Websites.find({}).fetch()[0],
+            // Using websiteId helps, but other website data are rewritten - anyway the 1st version is from the previous website
+            // and only then correct data are fetched and displayed
+            //websiteId: this.params.id,
+            // The most effective is:   website: Websites.find({_id: this.params.id}).fetch()[0],   -- with {_id:...}
         };
     },
 
