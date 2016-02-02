@@ -51,6 +51,7 @@ Router.route('/website-details/:id', {
         // // return [handle1, handle2];
         // // // return Meteor.subscribe('comments', this.params.id);
         // // // // var handle1 = Meteor.subscribe('websites', '');
+        Session.setDefault('searchString', '');
         var handle1 = Meteor.subscribe('websites', Session.get('searchString'));
         // Using the subscription above, I hope that meteor does NOT re-fetch subscription for 'home'
         // But actually all that I need is   Meteor.subscribe('website', this.params.id)
