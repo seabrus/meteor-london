@@ -3,8 +3,9 @@
 // ===========================================================
 Template.trackItem.onRendered(function() {
     var templateInstance = this;
-
     var track = Template.currentData().track;
+
+    // Slider initialization
     var sliderHandler = _.throttle( 
         function(event, ui) {
             MusicMachine.update({_id: track._id}, {$set: {speed: ui.value}});
@@ -12,9 +13,7 @@ Template.trackItem.onRendered(function() {
         50, 
         {leading: false}
     );
-
     var sliderDiv = templateInstance.$('#' + track.keyName);
-
     if (!sliderDiv.data('uiSlider')) {
         sliderDiv.slider({
             slide: sliderHandler,
@@ -23,6 +22,18 @@ Template.trackItem.onRendered(function() {
         });
         sliderDiv.data('uiSlider').value(track.speed);
     }
+
+    // Trace Changes 
+    templateInstance.autorun(function() {
+        var dbTrack = MusicMachine.findOne({_id: track._id});
+
+        if (dbTrack.isPlaying) { 
+            playTrackWithTitle(dbTrack.title); 
+        } else { 
+            stopTrackWithTitle(dbTrack.title); 
+        }
+    });
+
 });
 
 

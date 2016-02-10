@@ -10,17 +10,6 @@ Template.playground.onCreated(function() {
 
 
 // ===========================================================
-//   Initialization
-// ===========================================================
-Template.playground.onRendered(function() {
-    var templateInstance = this;
-
-    //templateInstance.$('h2').hide();
-    //console.log('templateInstance.$(h2).length = ' + templateInstance.$('h2').length)
-});
-
-
-// ===========================================================
 //   Helpers
 // ===========================================================
 Template.playground.helpers({
@@ -41,6 +30,8 @@ Template.playground.helpers({
     },
 });
 
+
+/*
 var trackHelpers = {};
 for (var i=0; i < TRACK_NUMBER; i++) {
   (function(n) {
@@ -59,8 +50,8 @@ for (var i=0; i < TRACK_NUMBER; i++) {
     };
   })(i);
 }
-
 Template.playground.helpers(trackHelpers);
+*/
 
 
 // ===========================================================
@@ -81,7 +72,6 @@ Template.playground.events({
 });
 
 
-   //return Session.get( TRACK_KEYS[n] );
 
 /*
     sliderVal1: function() { 
@@ -93,59 +83,3 @@ Template.playground.events({
         }
     },
 */
-/*
-    sliderId: function(index) {
-        return 'slider' + index;
-    },
-
-    "click button.js-track": function(event) {
-        var button = $(event.target);
-        var trackId = button.data('trackid');
-        var track = MusicMachine.findOne({_id: trackId});
-
-        if (track.isPlaying) {
-            //Session.set(sound.keyName, 1);
-            MusicMachine.update({_id: trackId}, {$set: {isPlaying: false}});
-            //button.text('Off');
-        }
-        else {
-            //Session.set(sound.keyName, 0);
-            MusicMachine.update({_id: trackId}, {$set: {isPlaying: true}});
-            //button.text('On');
-        }
-    },
-
-    "click button.js-sound-1": function(event) {
-        var button = $(event.target);
-        if (button.text() === 'On') {
-            Session.set('drums', 1);
-            var val = MusicMachine.findOne({});
-            MusicMachine.update({ _id: val._id }, {$set: {drums: 1}});
-            button.text('Off');
-        }
-        else {
-            Session.set('drums', 0);
-            var val = MusicMachine.findOne({});
-            MusicMachine.update({ _id: val._id }, {$set: {drums: 0}});
-            button.text('On');
-        }
-    },
-*/
-/*
-    "drums": function () {
-      var starter = MusicMachine.findOne();
-      if (starter) {
-        if (starter.drums==1) {
-          playDrums();
-
-        } else if (starter.drums==0) {
-
-          stopDrums();
-
-        }
-      }
-
-      return Session.get('drums');
-    },
-*/
-

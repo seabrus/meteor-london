@@ -1,4 +1,3 @@
-//playground.js
 maxims = [];
 players = [];
 
@@ -9,12 +8,34 @@ for (var i=0; i < TRACK_NUMBER; i++) {
     players[i].title = TRACK_TITLES[i];
 }
 
+
+function findIndexByTitle(title) {
+    for (var i=0; i < TRACK_NUMBER; i++) {
+        if (title === TRACK_TITLES[i]) 
+            break;
+    }
+    return i;
+}
+
 playTrack = function(n) {
 	players[n].volume(1);
-}
+};
 stopTrack = function(n) {
 	players[n].volume(0);
-}
+};
+
+playTrackWithTitle = function(title) {
+    var index = findIndexByTitle(title);
+    if (index < TRACK_NUMBER) {
+    	players[index].volume(1);
+    }
+};
+stopTrackWithTitle = function(title) {
+    var index = findIndexByTitle(title);
+    if (index < TRACK_NUMBER) {
+    	players[index].volume(0);
+    }
+};
 
 playAll = function() {
     for (var i=0; i < TRACK_NUMBER; i++) {
@@ -33,13 +54,9 @@ setSpeed = function(speed) {
     }
 };
 setTrackSpeed = function(title, speed) {
-    for (var i=0; i < TRACK_NUMBER; i++) {
-        if (title === TRACK_TITLES[i]) 
-            break;
-    }
-
-    if (i < TRACK_NUMBER) {
-        players[i].speed(speed);
+    var index = findIndexByTitle(title);
+    if (index < TRACK_NUMBER) {
+        players[index].speed(speed);
     }
 };
 
