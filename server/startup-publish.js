@@ -6,16 +6,16 @@ Meteor.startup(function() {
             keyName: 'all',
             isPlaying: false,
             speed: 50,
-            volume: 0,
+            amplitude: 100,
         });
 
-        for (var i=0; i < SOUND_NUMBER; i++) {
+        for (var i=0; i < TRACK_NUMBER; i++) {
             MusicMachine.insert({
-                title: SOUND_NAMES[i],
-                keyName: SOUND_KEYS[i],
-                isPlaying: false,
+                title: TRACK_TITLES[i],
+                keyName: TRACK_KEYS[i],
+                isPlaying: true,
                 speed: 50,
-                volume: 0,
+                amplitude: 100,
             });
         }
 

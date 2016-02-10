@@ -1,0 +1,38 @@
+<template name="playground">
+<!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
+
+{{#if notReady}}
+    {{> loading}}
+
+{{else}}
+<div class="container width-100">
+
+    <div class="row">
+        <div class="col-xs-3">
+            <button class="btn btn-default js-play-all">{{#if isPlaying}}Stop{{else}}Start{{/if}}</button>
+            <hr>
+        </div>
+    </div>
+
+    {{#each track in tracks}}
+        {{> trackItem track=track}}
+    {{/each}}
+
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>
+                {{drums}} {{caxi}} {{arp}} {{hihat}} {{bongo}} {{crowd}} {{horn}} {{tom}}
+            </h2>
+        </div>
+    </div>
+
+</div>
+{{/if}} <!-- end of "{{#if notReady}}..." -->
+
+</template>
+
+
+
+                <!--{{#each tracks}}
+                    * {{ [Template.playground.__helpers.get keyName] }}
+                {{/each}} -->

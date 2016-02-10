@@ -2,35 +2,44 @@
 maxims = [];
 players = [];
 
-for (var i=0; i < SOUND_NUMBER; i++) {
+for (var i=0; i < TRACK_NUMBER; i++) {
     maxims[i] = new Maxim();
-    players[i] = maxims[i].loadFile( SOUND_FILES[i] );
+    players[i] = maxims[i].loadFile( TRACK_FILES[i] );
     players[i].setLooping(true);
+    players[i].title = TRACK_TITLES[i];
 }
 
-playSound = function(n) {
+playTrack = function(n) {
 	players[n].volume(1);
 }
-
-stopSound = function(n) {
+stopTrack = function(n) {
 	players[n].volume(0);
 }
 
 playAll = function() {
-    for (var i=0; i < SOUND_NUMBER; i++) {
+    for (var i=0; i < TRACK_NUMBER; i++) {
 	    players[i].play();
     }
 };
-
 stopAll = function() {
-    for (var i=0; i < SOUND_NUMBER; i++) {
+    for (var i=0; i < TRACK_NUMBER; i++) {
 	    players[i].stop();
     }
 };
 
 setSpeed = function(speed) {
-    for (var i=0; i < SOUND_NUMBER; i++) {
-	    players[i].speed(speed);
+    for (var i=0; i < TRACK_NUMBER; i++) {
+        players[i].speed(speed);
+    }
+};
+setTrackSpeed = function(title, speed) {
+    for (var i=0; i < TRACK_NUMBER; i++) {
+        if (title === TRACK_TITLES[i]) 
+            break;
+    }
+
+    if (i < TRACK_NUMBER) {
+        players[i].speed(speed);
     }
 };
 

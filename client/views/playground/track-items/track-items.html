@@ -1,0 +1,18 @@
+<template name="trackItem">
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-3">
+            <div class="track-name">{{track.title}}</div> 
+            <button class="js-track" data-trackid="{{track._id}}" title="Play or mute the track">
+                {{#if track.isPlaying}}Off{{else}}On{{/if}}
+            </button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <div id="{{track.keyName}}"></div>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            Speed = {{sliderVal}}
+        </div>
+    </div>
+
+</template>
