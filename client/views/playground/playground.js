@@ -71,4 +71,3 @@ for (var i=0; i < TRACK_NUMBER; i++) {
 }
 Template.playground.helpers(trackHelpers);
 */
-

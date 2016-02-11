@@ -5,10 +5,11 @@
 
 .slider-style {
     display: inline-block;
-    width: 85%;
+    width: 80%;
 }
 
 .js-speed-value, .js-amplitude-value {
     display: inline-block;
-    font-size: 0.9em;
+    margin: 0 0 0 4px;
+    font-size: 0.85em;
 }

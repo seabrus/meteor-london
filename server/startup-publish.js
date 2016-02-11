@@ -6,7 +6,7 @@ Meteor.startup(function() {
             keyName: 'all',
             isPlaying: false,
             speed: 50,
-            amplitude: 100,
+            amplitude: 50,
         });
 
         for (var i=0; i < TRACK_NUMBER; i++) {
@@ -15,7 +15,7 @@ Meteor.startup(function() {
                 keyName: TRACK_KEYS[i],
                 isPlaying: true,
                 speed: 50,
-                amplitude: 100,
+                amplitude: 50,
             });
         }
 
