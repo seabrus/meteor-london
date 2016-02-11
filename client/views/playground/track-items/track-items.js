@@ -5,22 +5,22 @@ Template.trackItem.onRendered(function() {
     var templateInstance = this;
     var track = Template.currentData().track;
 
-    // Slider initialization
-    var sliderHandler = _.throttle( 
+    // Speed Slider initialization
+    var speedSliderHandler = _.throttle( 
         function(event, ui) {
             MusicMachine.update({_id: track._id}, {$set: {speed: ui.value}});
         }, 
         50, 
         {leading: false}
     );
-    var sliderDiv = templateInstance.$('#' + track.keyName);
-    if (!sliderDiv.data('uiSlider')) {
-        sliderDiv.slider({
-            slide: sliderHandler,
+    var speedSliderDiv = templateInstance.$('#' + track.keyName);
+    if ( !speedSliderDiv.data('uiSlider') ) {
+        speedSliderDiv.slider({
+            slide: speedSliderHandler,
             min: 0,
             max: 100,
         });
-        sliderDiv.data('uiSlider').value(track.speed);
+        speedSliderDiv.data('uiSlider').value(track.speed);
     }
 
     // Trace Changes 
@@ -42,7 +42,7 @@ Template.trackItem.onRendered(function() {
 // ===========================================================
 Template.trackItem.helpers({
 
-    sliderVal: function() { 
+    speedSliderVal: function() { 
         // In helpers templateInstance.$(...) do NOT work? 
         //   see https://github.com/meteor/meteor/issues/4264
 
@@ -57,6 +57,10 @@ Template.trackItem.helpers({
 
         setTrackSpeed(dbTrack.title, dbTrack.speed/50);
         return dbTrack.speed;
+    },
+
+    ampSliderVal: function() { 
+        return 50;
     },
 
 });

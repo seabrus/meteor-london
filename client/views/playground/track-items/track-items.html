@@ -1,17 +1,18 @@
 <template name="trackItem">
 
     <div class="row">
-        <div class="col-xs-4 col-sm-3">
+        <div class="col-xs-4 col-sm-4">
             <div class="track-name">{{track.title}}</div> 
             <button class="js-track" data-trackid="{{track._id}}" title="Play or mute the track">
                 {{#if track.isPlaying}}Off{{else}}On{{/if}}
             </button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <div id="{{track.keyName}}"></div>
+            <div id="{{track.keyName}}" class="slider-style"></div>
+            <div class="js-speed-value">{{speedSliderVal}}</div>
         </div>
         <div class="col-xs-4 col-sm-4">
-            Speed = {{sliderVal}}
+            Amplitude = <div class="js-amplitude-value">{{ampSliderVal}}</div>
         </div>
     </div>
 

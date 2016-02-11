@@ -1,0 +1,14 @@
+.track-name {
+  width: 75px;
+  display: inline-block;
+}
+
+.slider-style {
+    display: inline-block;
+    width: 85%;
+}
+
+.js-speed-value, .js-amplitude-value {
+    display: inline-block;
+    font-size: 0.9em;
+}

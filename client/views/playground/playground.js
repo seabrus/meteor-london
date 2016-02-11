@@ -31,6 +31,25 @@ Template.playground.helpers({
 });
 
 
+// ===========================================================
+//   Events
+// ===========================================================
+Template.playground.events({
+
+     'click button.js-play-all': function(event) {
+        var all = MusicMachine.findOne({title: 'all'});
+        if (all.isPlaying) {
+            MusicMachine.update({_id: all._id}, {$set: {isPlaying: false}});
+        }
+        else {
+            MusicMachine.update({_id: all._id}, {$set: {isPlaying: true}});
+        }
+    },
+
+});
+
+
+
 /*
 var trackHelpers = {};
 for (var i=0; i < TRACK_NUMBER; i++) {
@@ -53,33 +72,3 @@ for (var i=0; i < TRACK_NUMBER; i++) {
 Template.playground.helpers(trackHelpers);
 */
 
-
-// ===========================================================
-//   Events
-// ===========================================================
-Template.playground.events({
-
-     'click button.js-play-all': function(event) {
-        var all = MusicMachine.findOne({title: 'all'});
-        if (all.isPlaying) {
-            MusicMachine.update({_id: all._id}, {$set: {isPlaying: false}});
-        }
-        else {
-            MusicMachine.update({_id: all._id}, {$set: {isPlaying: true}});
-        }
-    },
-
-});
-
-
-
-/*
-    sliderVal1: function() { 
-        var slider = MusicMachine.findOne({title: 'all'});
-        if (slider) { 
-            $('#slider1').data('uiSlider').value(slider.speed);
-            setSpeed(slider.speed/50);
-            return slider.speed;
-        }
-    },
-*/
