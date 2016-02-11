@@ -20,7 +20,9 @@ body {
 .playground-container {
   max-width: 600px;
   margin: 0 auto;
-  min-height: 100%;
+  margin-top: 20px;
+  padding: 0 10px 0 10px; 
+  /* min-height: 100%; */
   background: SeaShell;
   border: 1px solid darkgrey;
   border-radius: 10px;
