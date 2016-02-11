@@ -156,6 +156,13 @@ Maxim = function() {
         gainNode.gain.linearRampToValueAtTime(gainNode.gain.value, context.currentTime);
         gainNode.gain.linearRampToValueAtTime(amplitude, context.currentTime + 10);
     };
+// My version =======================================================================
+    audio.setAmplitude_SB = function(amplitude) {
+        gainNode.gain.cancelScheduledValues(context.currentTime);
+        //gainNode.gain.linearRampToValueAtTime(gainNode.gain.value, context.currentTime);
+        gainNode.gain.linearRampToValueAtTime(amplitude, context.currentTime);
+    };
+// end =============================================================================
 
     audio.ramp = function(amplitude, envTime) {
         gainNode.gain.cancelScheduledValues(context.currentTime);

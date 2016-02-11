@@ -8,7 +8,7 @@
     width: 80%;
 }
 
-.js-speed-value, .js-amplitude-value {
+.js-speed-value, .js-volume-value {
     display: inline-block;
     margin: 0 0 0 4px;
     font-size: 0.85em;

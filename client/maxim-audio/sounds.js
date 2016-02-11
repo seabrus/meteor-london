@@ -24,10 +24,10 @@ stopTrack = function(n) {
 	players[n].volume(0);
 };
 
-playTrackWithTitle = function(title) {
+playTrackWithTitle = function(title, vol) {
     var index = findIndexByTitle(title);
     if (index < TRACK_NUMBER) {
-    	players[index].volume(1);
+    	players[index].volume(vol);
     }
 };
 stopTrackWithTitle = function(title) {
@@ -63,7 +63,15 @@ setTrackSpeed = function(title, speed) {
 setTrackAmplitude = function(title, amplitude) {
     var index = findIndexByTitle(title);
     if (index < TRACK_NUMBER) {
-        players[index].setAmplitude(amplitude);
+        //players[index].setAmplitude(amplitude);
+        players[index].setAmplitude_SB(amplitude);
+    }
+};
+
+setTrackFilterRamp = function(title, freq) {
+    var index = findIndexByTitle(title);
+    if (index < TRACK_NUMBER) {
+        players[index].filterRamp(freq * 20000, 1.0);
     }
 };
 
