@@ -95,7 +95,7 @@ Template.trackItem.events({
 // ===========================================================
 //   Helpers
 // ===========================================================
-Template.trackItem.helpers({
+//Template.trackItem.helpers({
 /*
     speedSliderVal: function() { 
         // In helpers templateInstance.$(...) do NOT work? 
@@ -114,4 +114,4 @@ Template.trackItem.helpers({
         return dbTrack.speed;
     },
 */
-});
+//});

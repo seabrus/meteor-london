@@ -74,4 +74,3 @@ setTrackFilterRamp = function(title, freq) {
         players[index].filterRamp(freq * 20000, 1.0);
     }
 };
-

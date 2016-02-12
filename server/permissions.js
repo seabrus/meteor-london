@@ -7,7 +7,7 @@ MusicMachine.allow({
 	}, 
 
 	update: function(userId, doc, fields, modifier) {
-//        return (_.contains(fields, 'slide'));
-        return true;
+//        return true;
+        return (_.contains(fields, 'isPlaying') || _.contains(fields, 'speed') || _.contains(fields, 'volume'));
 	},
 });
