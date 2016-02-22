@@ -1,0 +1,44 @@
+<!-- Top level template for the chat page -->
+<template name="chatPage">
+
+    <h3>Type in the box below to send a message</h3>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="well well-lg">
+            {{#each message in messages}}
+                {{> chatMessage message=message username=companionProfile.username}}
+            {{/each}}
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="text-center"> 
+                <img src="/{{companionProfile.avatar}}" class="avatar-img" alt="Companion avatar">
+                <br>
+                {{companionProfile.username}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <form class="js-send-chat">
+                <div class="form-group">
+                    <textarea class="form-control bk-yellow" rows="3" 
+                        name="chat-textarea" placeholder="Type a message here..." value=""></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</template>
+
+
+<!-- simple template that displays a message -->
+<template name="chatMessage">
+
+    {{username}}: {{message.text}}
+    <br>
+
+</template>

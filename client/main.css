@@ -1,0 +1,13 @@
+.user-avatar {
+    min-height: 100px;
+    text-align: center;
+}
+
+.avatar-img {
+    height: 75px;
+}
+
+.bk-yellow {
+    background-color: #fefdeb;
+}
+
