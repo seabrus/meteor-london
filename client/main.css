@@ -18,3 +18,24 @@
 .bg-no-image {
     background-image: none;
 }
+
+.width-100 {
+    width: 100%;
+}
+.width-50 {
+    width: 49%;
+}
+.inline-block {
+    display: inline-block;
+}
+
+.my-message {
+    color: darkblue;
+}
+.other-message {
+    color: red;
+}
+
+.emo {
+    width: 1.5em;
+}

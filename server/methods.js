@@ -1,7 +1,7 @@
 // ===============================================================================
 //   Match pattern
 // ===============================================================================
-NonEmptyString = Match.Where(function(x) {
+var NonEmptyString = Match.Where(function(x) {
     return (typeof x === 'string'  &&  x.length > 0);
 });
 
@@ -25,5 +25,55 @@ Meteor.methods({
             throw new Meteor.Error('bad-arguments', 'addChat error 1');
         } 
     }, // end of "addChat..."
+
+
+    // Insert a new message
+    addMessage: function(chatId, text) {
+        if (this.userId  &&  Match.test(chatId, NonEmptyString)  &&  Match.test(text, NonEmptyString)) {
+
+            var username = Meteor.users.findOne({_id: this.userId}).profile.username || 'me';
+
+            try {
+                Messages.insert({
+                    chatId: chatId,
+                    createdAt: new Date(),
+                    createdBy: username,
+                    text: text
+                });
+
+                return 'ok';
+            }
+            catch(e) {
+                console.log('addMessage error: Cannot insert message - ' + 
+                        e.message + '; chatId = ' + chatId + '; text = ' + text);
+                throw new Meteor.Error('addmessage-error', 'addMessage error 2');
+            } // end of "try-catch" block
+
+        } else {
+            console.log( 'addMessage error: Unauthed user or the arguments are incorrect' );
+            throw new Meteor.Error('bad-arguments', 'addMessage error 1');
+        } 
+    }, // end of "addMessage..."
+
+
+    // Remove all messages for this chat
+    removeMessages: function(chatId) {
+        if (this.userId  &&  Match.test(chatId, NonEmptyString)) {
+
+            try {
+                Messages.remove({chatId: chatId});
+                return 'ok';
+            }
+            catch(e) {
+                console.log('removeMessages error: Cannot remove messages - ' + 
+                        e.message + '; chatId = ' + chatId);
+                throw new Meteor.Error('removemessages-error', 'removeMessages error 2');
+            } // end of "try-catch" block
+
+        } else {
+            console.log( 'removeMessages error: Unauthed user or the arguments are incorrect' );
+            throw new Meteor.Error('bad-arguments', 'removeMessages error 1');
+        } 
+    }, // end of "removeMessages..."
 
 });

@@ -6,39 +6,42 @@
         <div class="col-md-10">
             <div class="well well-lg bg-green bg-no-image">
             {{#each message in messages}}
-                {{> chatMessage message=message username=companionProfile.username}}
+                {{> chatMessage message=message myUsername=myUsername}}
             {{/each}}
             </div>
         </div>
-        <div class="col-md-1">
-            <div class="text-center"> 
+        <div class="col-md-2">
+            <div class="text-center width-100"> 
                 <img src="/{{companionProfile.avatar}}" class="avatar-img" alt="Companion avatar">
-                <br>
-                {{companionProfile.username}}
+                <p>{{companionProfile.username}}</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-10">
+            <div>
+                <img src="/icons/smile.png" class="emo js-emo" data-emo=":)">
+                <img src="/icons/sad.png" class="emo js-emo" data-emo=":(">
+                <img src="/icons/heart.png" class="emo js-emo" data-emo="(heart)">
+                <img src="/icons/sun.png" class="emo js-emo" data-emo="(sun)">
+                <img src="/icons/kiss.png" class="emo js-emo" data-emo="(kiss)">
+                <img src="/icons/drinks.png" class="emo js-emo" data-emo="(d)">
+            </div>
             <form class="js-send-chat">
                 <div class="form-group">
-                    <textarea class="form-control bg-yellow" rows="3" 
+                    <textarea class="form-control bg-yellow" rows="3" id="textarea_id"
                         name="chat-textarea" placeholder="Type a message here..." value=""></textarea>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary">Send</button>
+                    <div class="inline-block width-50 text-left">
+                        <button class="btn btn-primary">Send</button>
+                    </div>
+                    <div class="inline-block width-50 text-right">
+                        <button class="btn btn-default js-remove-messages">Remove All Messages</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-
-</template>
-
-
-<!-- simple template that displays a message -->
-<template name="chatMessage">
-
-    {{username}}: {{message.text}}
-    <br>
 
 </template>

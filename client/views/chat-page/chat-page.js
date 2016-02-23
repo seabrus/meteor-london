@@ -2,17 +2,19 @@
 //   Template's variables and functions
 // =================================================
 Template.chatPage.onCreated(function() {
-    var template = this;
+    var templateInstance = this;
 
-    template.chat = function() { 
+    templateInstance.chat = function() { 
         return Chats.findOne({_id: Session.get('chatId')});
     };
 
-    template.autorun(function() {
-        var chat = template.chat();
+    templateInstance.autorun(function() {
+        templateInstance.subscribe('messages', Session.get('chatId'));
+
+        var chat = templateInstance.chat();
         if (chat) {
             var companionId = (chat.user1Id === Meteor.userId()) ? chat.user2Id : chat.user1Id;
-            template.companion = Meteor.users.findOne({_id: companionId});
+            templateInstance.companion = Meteor.users.findOne({_id: companionId});
         }
     });
 
@@ -23,24 +25,32 @@ Template.chatPage.onCreated(function() {
 //   Helpers
 // =================================================
 Template.chatPage.helpers({
+    myUsername: function() {
+        return Meteor.user().profile.username || 'me';
+    },
+
     companionProfile: function() {
         var companion = Template.instance().companion;
         if (companion) {
-            return companion.profile;
+            var profile = companion.profile;
+            if (!profile.username) {
+                profile.username = 'stranger';
+            }
+            if (!profile.avatar) {
+                profile.avatar = 'ava0.png';
+            }
+            return profile;
         }
+
         return {};
     },
 
     messages: function() {
-        var chat = Template.instance().chat();
-        if (chat) {
-            return chat.messages;
-        } 
-        return [];
-    },
+        if (Template.instance().subscriptionsReady()) {
+            return Messages.find({chatId: Session.get('chatId')}, {sort: [['createdAt', 'asc']]});
+        }
 
-    otherUser: function() {
-        return '';
+        return [];
     },
 
 });
@@ -55,11 +65,63 @@ Template.chatPage.events({
         // stop the form from triggering a page reload
         event.preventDefault();
 
-        // see if we can find a chat object in the database
-        // to which we'll add the message
         var chat = instance.chat();
+        if (chat) {
+            var text = event.target['chat-textarea'].value;
+            // reset the form
+            event.target['chat-textarea'].value = '';
 
-        if (chat) { // ok - we have a chat to use
+            // insert the message in the database
+            Meteor.call('addMessage', chat._id, text, function(error) {
+                if (error) {
+                    console.log('addMessage error');
+                }
+            });
+
+        }
+    }, // end of " 'submit .js-send-chat'..."
+
+
+    // this event fires when the user clicks the button "Remove..."
+    'click .js-remove-messages': function(event, instance) {
+        // stop the form from triggering a page reload
+        event.preventDefault();
+
+        var chat = instance.chat();
+        if (chat) {
+            var yes = confirm('All messages will be removed permanently.\nAre you sure?');
+            if (yes) {
+                // remove the messages
+                Meteor.call('removeMessages', chat._id, function(error) {
+                    if (error) {
+                        console.log('removeMessages error');
+                    }
+                });
+            } // end of "if (yes)..."
+        }
+    }, // end of " 'click .js-remove-messages'..."
+
+
+    // this event fires when the user clicks on an emoticon
+    'click .js-emo': function(event) {
+        event.preventDefault();
+
+        var emoString = $(event.target).data('emo');
+        var textarea = $('#textarea_id');
+        var caretPos = textarea.caret();   // see /client/lib/caret/caret.js
+        var initText = textarea.val();
+        var resultText = initText.slice(0, caretPos) + emoString + initText.slice(caretPos);
+
+        textarea.val(resultText);
+        textarea.focus();
+        textarea.caret(caretPos + emoString.length);
+    }, // end of " 'click .js-emo'..."
+
+});
+
+
+
+/*
             var msgs = chat.messages; // pull the messages property
             if (!msgs) { // no messages yet, create a new array
                 msgs = [];
@@ -68,16 +130,4 @@ Template.chatPage.events({
             // is a good idea to insert data straight from the form
             // (i.e. the user) into the database? certainly not.
             // push adds the message to the end of the array
-            msgs.push({text: event.target['chat-textarea'].value});
-
-            // reset the form
-            event.target['chat-textarea'].value = '';
-
-            // put the messages array onto the chat object
-            chat.messages = msgs;
-
-            // update the chat object in the database.
-            Chats.update(chat._id, chat);
-        }
-    },
-});
+*/

@@ -20,7 +20,7 @@ iron:router
 accounts-password
 twbs:bootstrap
 ian:accounts-ui-bootstrap-3
-insecure
 check
 ddp-rate-limiter
 aldeed:collection2
+underscore
