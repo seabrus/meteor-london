@@ -1,38 +1,21 @@
 <!-- Top level template for the home page -->
 <template name="home">
-    {{> available_user_list}}
-</template>
 
+    {{#if currentUser}}
+        {{> availableUserList}}
+    {{else}}
 
-<!-- display a list of users -->
-<template name="available_user_list">
-
-    <h2>Choose someone to chat with:</h2>
     <div class="row">
-    {{#each users}}
-        {{> available_user}}
-    {{/each}}
-    </div>
-
-</template>
-
-
-<!-- display an individual user -->
-<template name="available_user">
-    <div class="col-md-3">
-        <div class="user-avatar">
-            {{#if isMyUser _id}}
-            <div class="bg-success">{{getUsername _id}} (YOU)
-                <br>
-                <img src="/{{profile.avatar}}" class="avatar-img">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron bg-green">
+                <div class="text-center">
+                    <h2>Welcome to Minstant!</h2>
+                    <p>Please log in to start chating</p>
+                </div>
             </div>
-            {{else}}
-            <a href="/chat/{{_id}}">
-                {{getUsername _id}}
-                <br>
-                <img src="/{{profile.avatar}}" class="avatar-img">
-            </a>
-            {{/if}}
         </div>
     </div>
+
+    {{/if}}
+
 </template>

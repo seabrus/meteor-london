@@ -1,20 +1,24 @@
 // Set up the main template the the router will use to build pages
 Router.configure({
-    layoutTemplate: 'applicationLayout'
+    layoutTemplate: 'applicationLayout',
 });
 
 
-// Specify the top level route, the page users see when they arrive at the site
+// Top level route, the page users see when they arrive at the site
 Router.route('/', function() {
-    this.render("navbar", {to: "header"});
-    this.render("home", {to: "main"});
-});
+        this.render("navbar", {to: "header"});
+        this.render("home", {to: "main"});
+    }, 
+    {name: 'home'}
+);
 
 
-// Specify a route that allows the current user to chat to another users
+// Route that allows the current user to chat to another users
 Router.route('/chat/:_id', function() {
+    var thisRoute = this;
+
     // the user they want to chat to has id equal to the id sent in after /chat/...
-    var otherUserId = this.params._id;
+    var otherUserId = thisRoute.params._id;
 
     // find a chat that has two users that match current user id
     // and the requested user id
@@ -26,16 +30,36 @@ Router.route('/chat/:_id', function() {
 
     // no chat matching the filter - need to insert a new one
     if (!chat) {
-      chatId = Chats.insert({user1Id: Meteor.userId(), user2Id: otherUserId});
+        Meteor.call('addChat', otherUserId, function(error, result) {
+            if (error) {
+                alert('Sorry, try Minstant a bit later');
+                thisRoute.redirect('/');
+            }
+
+            Session.set("chatId", result);
+            thisRoute.render("navbar", {to: "header"});
+            thisRoute.render("chatPage", {to: "main"});
+        });
     }
     else { // there is a chat going already - use that
-      chatId = chat._id;
-    }
+        var chatId = chat._id;
+        if (chatId) { // looking good, save the id to the session
+            Session.set("chatId", chatId);
+        }
+        thisRoute.render("navbar", {to: "header"});
+        thisRoute.render("chatPage", {to: "main"});
+    } // end of "if (!chat)..."
 
-    if (chatId) { // looking good, save the id to the session
-      Session.set("chatId", chatId);
-    }
-
-    this.render("navbar", {to: "header"});
-    this.render("chatPage", {to: "main"});
 });
+
+
+Router.onBeforeAction(function() {
+        if (!Meteor.user()) {
+            this.redirect('home');
+        } 
+        else {
+            this.next();
+       }
+    },
+    {except: ['home']}
+);

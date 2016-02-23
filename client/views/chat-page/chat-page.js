@@ -26,17 +26,20 @@ Template.chatPage.helpers({
     companionProfile: function() {
         var companion = Template.instance().companion;
         if (companion) {
-            var profile = companion.profile;
+            return companion.profile;
         }
-        return profile;
+        return {};
     },
 
     messages: function() {
         var chat = Template.instance().chat();
-        return chat.messages;
+        if (chat) {
+            return chat.messages;
+        } 
+        return [];
     },
 
-    other_user: function() {
+    otherUser: function() {
         return '';
     },
 

@@ -7,7 +7,14 @@
     height: 75px;
 }
 
-.bk-yellow {
+.bg-yellow {
     background-color: #fefdeb;
 }
 
+.bg-green {
+    background-color: #d8f3e2; /* #ebf5d6 #e9fce9; */
+}
+
+.bg-no-image {
+    background-image: none;
+}

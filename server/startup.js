@@ -13,7 +13,7 @@ Meteor.startup(function() {
             Meteor.users.insert({
                 profile: {username: username, avatar: avatar},
                 emails: [ {address: email} ],
-                services:{ password: {"bcrypt": "$2a$10$I3erQ084OiyILTv8ybtQ4ON6wusgPbMZ6.P33zzSDei.BbDL.Q4EO"}},
+                services: {password: {"bcrypt": "$2a$10$I3erQ084OiyILTv8ybtQ4ON6wusgPbMZ6.P33zzSDei.BbDL.Q4EO"}},
             });
         } // end of "for (var i=1;..."
     }
