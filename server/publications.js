@@ -4,6 +4,7 @@ Meteor.publish('companions', function() {
 	    return Meteor.users.find(
 	            {},
 	            {fields: {
+                    username: 1,
                     profile: 1,
                 }}
 	    );
@@ -49,9 +50,12 @@ Meteor.publish('messages', function(chatId) {
                     createdAt: 1,
                     createdBy: 1,
                     text: 1,
-                }}
+                 },
+                 sort: [['createdAt', 'asc']],
+                 limit: 100,
+                } // end of  " {fields:... "
 	    );
-    }
+    } // end of  "if (this.userId... "
     
 	this.ready();
 	return;

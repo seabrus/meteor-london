@@ -1,5 +1,5 @@
 // =================================================
-//   Template's variables and functions
+//   Template's variables, functions, and subscription
 // =================================================
 Template.chatPage.onCreated(function() {
     var templateInstance = this;
@@ -25,24 +25,21 @@ Template.chatPage.onCreated(function() {
 //   Helpers
 // =================================================
 Template.chatPage.helpers({
-    myUsername: function() {
-        return Meteor.user().profile.username || 'me';
-    },
 
-    companionProfile: function() {
+    companion: function() {
         var companion = Template.instance().companion;
         if (companion) {
             var profile = companion.profile;
-            if (!profile.username) {
-                profile.username = 'stranger';
-            }
+            //if (!profile.username) {
+            //    profile.username = companion.username;   //'stranger';
+            //}
             if (!profile.avatar) {
                 profile.avatar = 'ava0.png';
             }
-            return profile;
+            return companion;
         }
 
-        return {};
+        return {profile: {}};
     },
 
     messages: function() {
@@ -51,6 +48,21 @@ Template.chatPage.helpers({
         }
 
         return [];
+    },
+
+    emos: function() {
+        return [                                        // credits to WebIconSet.com
+            {image: 'smile.png', sign: ':)', title: 'Smile :)'},
+            {image: 'sad.png', sign: ':(', title: 'Sad :('},
+            {image: 'heart.png', sign: '(heart)', title: 'Heart (heart)'},
+            {image: 'sun.png', sign: '(sun)', title: 'Sun (sun)'},
+            {image: 'kiss.png', sign: '(kiss)', title: 'Kiss (kiss)'},
+            {image: 'drinks.png', sign: '(d)', title: 'Drinks (drinks)'},
+            {image: 'cake.png', sign: '(^)', title: 'Cake (^)'},
+            {image: 'nerd.png', sign: '(nerd)', title: 'Nerd (nerd)'},
+            {image: 'star.png', sign: '(*)', title: 'Star (*)'},
+            {image: 'flower.png', sign: '(F)', title: 'Flower (F)'},
+        ];
     },
 
 });
@@ -89,7 +101,7 @@ Template.chatPage.events({
 
         var chat = instance.chat();
         if (chat) {
-            var yes = confirm('All messages will be removed permanently.\nAre you sure?');
+            var yes = confirm('Are you sure?');
             if (yes) {
                 // remove the messages
                 Meteor.call('removeMessages', chat._id, function(error) {
@@ -108,7 +120,7 @@ Template.chatPage.events({
 
         var emoString = $(event.target).data('emo');
         var textarea = $('#textarea_id');
-        var caretPos = textarea.caret();   // see /client/lib/caret/caret.js
+        var caretPos = textarea.caret();   // see for details /client/lib/caret/caret.js and https://github.com/accursoft/caret
         var initText = textarea.val();
         var resultText = initText.slice(0, caretPos) + emoString + initText.slice(caretPos);
 
@@ -118,16 +130,3 @@ Template.chatPage.events({
     }, // end of " 'click .js-emo'..."
 
 });
-
-
-
-/*
-            var msgs = chat.messages; // pull the messages property
-            if (!msgs) { // no messages yet, create a new array
-                msgs = [];
-            }
-
-            // is a good idea to insert data straight from the form
-            // (i.e. the user) into the database? certainly not.
-            // push adds the message to the end of the array
-*/

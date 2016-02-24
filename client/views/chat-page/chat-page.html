@@ -6,26 +6,23 @@
         <div class="col-md-10">
             <div class="well well-lg bg-green bg-no-image">
             {{#each message in messages}}
-                {{> chatMessage message=message myUsername=myUsername}}
+                {{> chatMessage message=message}}
             {{/each}}
             </div>
         </div>
         <div class="col-md-2">
             <div class="text-center width-100"> 
-                <img src="/{{companionProfile.avatar}}" class="avatar-img" alt="Companion avatar">
-                <p>{{companionProfile.username}}</p>
+                <img src="/{{companion.profile.avatar}}" class="avatar-img" alt="Companion avatar">
+                <p>{{companion.username}}</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-10">
             <div>
-                <img src="/icons/smile.png" class="emo js-emo" data-emo=":)">
-                <img src="/icons/sad.png" class="emo js-emo" data-emo=":(">
-                <img src="/icons/heart.png" class="emo js-emo" data-emo="(heart)">
-                <img src="/icons/sun.png" class="emo js-emo" data-emo="(sun)">
-                <img src="/icons/kiss.png" class="emo js-emo" data-emo="(kiss)">
-                <img src="/icons/drinks.png" class="emo js-emo" data-emo="(d)">
+                {{#each emo in emos}}
+                    <img src="/icons/{{emo.image}}" class="emo js-emo" data-emo="{{emo.sign}}" title="{{emo.title}}">
+                {{/each}}
             </div>
             <form class="js-send-chat">
                 <div class="form-group">

@@ -40,7 +40,7 @@ var messagesSchema = new SimpleSchema({
         type: String,
         label: 'Message text',
         min: 1,
-        max: 1000,
+        max: 500,
         denyUpdate: true,
     },
 });

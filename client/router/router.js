@@ -1,6 +1,7 @@
 // Set up the main template the the router will use to build pages
 Router.configure({
     layoutTemplate: 'applicationLayout',
+    loadingTemplate: 'loadingView',
 });
 
 

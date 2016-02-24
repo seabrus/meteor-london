@@ -11,13 +11,13 @@
 var chatsSchema = new SimpleSchema({
     user1Id: {
         type: String,
-        label: 'user1Id',
+        label: 'User1 ID',
         min: 1,
         denyUpdate: true,
     },
     user2Id: {
         type: String,
-        label: 'user2Id',
+        label: 'User2 ID',
         min: 1,
         denyUpdate: true,
     },

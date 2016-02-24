@@ -21,7 +21,7 @@ Meteor.methods({
             } // end of "try-catch" block
 
         } else {
-            console.log( 'addChat error: Unauthed user or the "otherUserId" argument is incorrect' );
+            console.log( 'addChat error: Unauthed user or the "otherUserId" argument is incorrect');
             throw new Meteor.Error('bad-arguments', 'addChat error 1');
         } 
     }, // end of "addChat..."
@@ -31,14 +31,14 @@ Meteor.methods({
     addMessage: function(chatId, text) {
         if (this.userId  &&  Match.test(chatId, NonEmptyString)  &&  Match.test(text, NonEmptyString)) {
 
-            var username = Meteor.users.findOne({_id: this.userId}).profile.username || 'me';
+            var username = Meteor.users.findOne({_id: this.userId}).username;     // <<<<< Add check if this is not "undefined"
 
             try {
                 Messages.insert({
                     chatId: chatId,
                     createdAt: new Date(),
                     createdBy: username,
-                    text: text
+                    text: text,
                 });
 
                 return 'ok';
@@ -50,7 +50,7 @@ Meteor.methods({
             } // end of "try-catch" block
 
         } else {
-            console.log( 'addMessage error: Unauthed user or the arguments are incorrect' );
+            console.log( 'addMessage error: Unauthed user or the arguments are incorrect');
             throw new Meteor.Error('bad-arguments', 'addMessage error 1');
         } 
     }, // end of "addMessage..."
@@ -71,7 +71,7 @@ Meteor.methods({
             } // end of "try-catch" block
 
         } else {
-            console.log( 'removeMessages error: Unauthed user or the arguments are incorrect' );
+            console.log( 'removeMessages error: Unauthed user or the arguments are incorrect');
             throw new Meteor.Error('bad-arguments', 'removeMessages error 1');
         } 
     }, // end of "removeMessages..."
