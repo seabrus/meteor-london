@@ -1,13 +1,15 @@
 <!-- Top level template for the chat page -->
 <template name="chatPage">
 
-    <h3>Type in the box below to send a message</h3>
+    <h3>Chat history</h3>
     <div class="row">
         <div class="col-md-10">
-            <div class="well well-lg bg-green bg-no-image">
-            {{#each message in messages}}
-                {{> chatMessage message=message}}
-            {{/each}}
+            <div class="well well-lg bg-green bg-no-image height-200" id="chat-history-div">
+                {{#let messagesLength=messages.count}}
+                    {{#each message in messages}}
+                        {{> chatMessage message=message messagesNum=messagesLength index=@index}}
+                    {{/each}}
+                {{/let}}
             </div>
         </div>
         <div class="col-md-2">
@@ -17,6 +19,10 @@
             </div>
         </div>
     </div>
+
+    <h3>Type in below to send a message
+        <span class="font-half-em">(no more than 500 symbols)</span>
+    </h3>
     <div class="row">
         <div class="col-md-10">
             <div>

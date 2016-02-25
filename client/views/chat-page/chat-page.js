@@ -30,9 +30,6 @@ Template.chatPage.helpers({
         var companion = Template.instance().companion;
         if (companion) {
             var profile = companion.profile;
-            //if (!profile.username) {
-            //    profile.username = companion.username;   //'stranger';
-            //}
             if (!profile.avatar) {
                 profile.avatar = 'ava0.png';
             }
@@ -51,18 +48,7 @@ Template.chatPage.helpers({
     },
 
     emos: function() {
-        return [                                        // credits to WebIconSet.com
-            {image: 'smile.png', sign: ':)', title: 'Smile :)'},
-            {image: 'sad.png', sign: ':(', title: 'Sad :('},
-            {image: 'heart.png', sign: '(heart)', title: 'Heart (heart)'},
-            {image: 'sun.png', sign: '(sun)', title: 'Sun (sun)'},
-            {image: 'kiss.png', sign: '(kiss)', title: 'Kiss (kiss)'},
-            {image: 'drinks.png', sign: '(d)', title: 'Drinks (drinks)'},
-            {image: 'cake.png', sign: '(^)', title: 'Cake (^)'},
-            {image: 'nerd.png', sign: '(nerd)', title: 'Nerd (nerd)'},
-            {image: 'star.png', sign: '(*)', title: 'Star (*)'},
-            {image: 'flower.png', sign: '(F)', title: 'Flower (F)'},
-        ];
+        return emoticons;   // see /client/lib/emotions
     },
 
 });

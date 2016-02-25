@@ -39,3 +39,11 @@
 .emo {
     width: 1.5em;
 }
+
+.height-200 {
+    max-height: 200px;
+    overflow-y: auto;
+}
+.font-half-em {
+    font-size: 0.75em;
+}
