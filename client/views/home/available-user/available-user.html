@@ -4,16 +4,21 @@
     <div class="col-md-3">
         <div class="user-avatar">
             {{#if isMyUser user._id}}
-                <div class="bg-green">{{getUsername user}} (me)
-                    <br>
+                <div class="bg-green top-padding-10">
                     <img src="/{{getAvatar user}}" class="avatar-img">
+                    <br>
+                    {{getUsername user}} (me)
                 </div>
             {{else}}
-                <a href="/chat/{{user._id}}">
-                    {{getUsername user}}
-                    <br>
-                    <img src="/{{getAvatar user}}" class="avatar-img">
-                </a>
+                <div class="top-padding-10">
+                    <a href="/chat/{{user._id}}">
+                        <img src="/{{getAvatar user}}" class="avatar-img">
+                        <br>
+                        {{getUsername user}}
+                        <img src="/status/{{#if isOnline user}}green.png{{else}}red.png{{/if}}"
+                            title="{{#if isOnline user}}Online{{else}}Offline{{/if}}">
+                    </a>
+                </div>
             {{/if}}
         </div>
     </div>

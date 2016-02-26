@@ -1,6 +1,7 @@
 .user-avatar {
     min-height: 100px;
     text-align: center;
+    margin-top: 15px;
 }
 
 .avatar-img {
@@ -13,6 +14,10 @@
 
 .bg-green {
     background-color: #d8f3e2; /* #ebf5d6 #e9fce9; */
+}
+
+.top-padding-10 {
+    padding-top: 10px;
 }
 
 .bg-no-image {
