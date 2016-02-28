@@ -15,7 +15,10 @@
         <div class="col-md-2">
             <div class="text-center width-100"> 
                 <img src="/{{companion.profile.avatar}}" class="avatar-img" alt="Companion avatar">
-                <p>{{companion.username}}</p>
+                <p>{{companion.username}}<br>
+                    <img src="/status/{{#if isCompanionOnline}}green.png{{else}}red.png{{/if}}"
+                        title="{{#if isCompanionOnline}}Online{{else}}Offline{{/if}}">
+                </p>
             </div>
         </div>
     </div>

@@ -1,12 +1,31 @@
 // =================================================
-//   Template's variables, functions, and subscription
+//   Subscription, and template's variables and functions
 // =================================================
 Template.chatPage.onCreated(function() {
     var templateInstance = this;
 
+    // Subscription
+    templateInstance.subscribe('messages', Session.get('chatId'));
+
+    // Template's variables and functions
+    var chat = Chats.findOne({_id: Session.get('chatId')});
+    var companionId = (chat.user1Id === Meteor.userId()) ? chat.user2Id : chat.user1Id;
+
+    Session.setDefault('isCompanionOnline', false);
+
+    templateInstance.autorun(function() {
+        templateInstance.companion = Meteor.users.findOne({_id: companionId});
+        if (templateInstance.companion) {
+            Session.set('isCompanionOnline', templateInstance.companion.status.online);
+        }
+    });
+
+/*
+    // Template's variables and functions
     templateInstance.chat = function() { 
         return Chats.findOne({_id: Session.get('chatId')});
     };
+    Session.setDefault('isCompanionOnline', false);
 
     templateInstance.autorun(function() {
         templateInstance.subscribe('messages', Session.get('chatId'));
@@ -15,9 +34,10 @@ Template.chatPage.onCreated(function() {
         if (chat) {
             var companionId = (chat.user1Id === Meteor.userId()) ? chat.user2Id : chat.user1Id;
             templateInstance.companion = Meteor.users.findOne({_id: companionId});
+            Session.set('isCompanionOnline', templateInstance.companion.status.online);
         }
     });
-
+*/
 });
 
 
@@ -37,6 +57,10 @@ Template.chatPage.helpers({
         }
 
         return {profile: {}};
+    },
+
+    isCompanionOnline: function() {
+        return Session.get('isCompanionOnline');
     },
 
     messages: function() {
@@ -63,6 +87,18 @@ Template.chatPage.events({
         // stop the form from triggering a page reload
         event.preventDefault();
 
+        var chatId = Session.get('chatId');
+        var text = event.target['chat-textarea'].value;
+        // insert the message in the database
+        Meteor.call('addMessage', chatId, text, function(error) {
+            if (error) {
+                console.log('addMessage error');
+            }
+            // reset the form
+            event.target['chat-textarea'].value = '';
+        });
+
+/*
         var chat = instance.chat();
         if (chat) {
             var text = event.target['chat-textarea'].value;
@@ -77,6 +113,7 @@ Template.chatPage.events({
             });
 
         }
+*/
     }, // end of " 'submit .js-send-chat'..."
 
 
@@ -85,6 +122,18 @@ Template.chatPage.events({
         // stop the form from triggering a page reload
         event.preventDefault();
 
+        var yes = confirm('Are you sure?');
+        if (yes) {
+            var chatId = Session.get('chatId');
+            // remove the messages
+            Meteor.call('removeMessages', chatId, function(error) {
+                if (error) {
+                    console.log('removeMessages error');
+                }
+            });
+        } // end of "if (yes)..."
+
+/*
         var chat = instance.chat();
         if (chat) {
             var yes = confirm('Are you sure?');
@@ -97,6 +146,7 @@ Template.chatPage.events({
                 });
             } // end of "if (yes)..."
         }
+*/
     }, // end of " 'click .js-remove-messages'..."
 
 
